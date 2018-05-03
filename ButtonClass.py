@@ -22,7 +22,7 @@ size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 
 #background
-background = pygame.image.load("vignettebackground.png")
+background = pygame.image.load("Target.png")
 
 #music
 #pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
@@ -164,7 +164,7 @@ while carryOn:
     # --- Draw code goes here
 
     # Clear the screen to white
-    screen.blit(background, (-150, 50))
+    screen.blit(background, (0, 0))
 
     # Draw buttons
     if level == 1:
