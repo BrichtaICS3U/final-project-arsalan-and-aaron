@@ -3,7 +3,7 @@
 
 import pygame, sys
 pygame.init()
-
+from Target import Target
 # Define some colours
 WHITE = (255, 255, 255)
 GRAY = (127, 127, 127)
@@ -16,7 +16,7 @@ BUTTON1 = (148, 155, 150)
 BUTTON2 = (130, 145, 145)
 BUTTON3 = (76, 91, 97)
 YELLOW = (254, 215, 10)
-
+DARK_BLUE = (7, 59, 76)
 SCREENWIDTH = 800
 SCREENHEIGHT = 800
 size = (SCREENWIDTH, SCREENHEIGHT)
@@ -168,7 +168,6 @@ while carryOn:
     # Clear the screen to white
     screen.blit(background, (0, 0))
 
-    screen.fill(YELLOW)
     # Draw buttons
     if level == 1:
         for button in level1_buttons:
@@ -186,12 +185,12 @@ while carryOn:
             button.draw()
         #SettingsTitle
         fontSettingsTitle = pygame.font.Font('freesansbold.ttf', 50)
-        textSurfaceSettingsTitle = fontSettingsTitle.render('Settings', True, LIGHT_GREY) 
+        textSurfaceSettingsTitle = fontSettingsTitle.render('Settings', True, DARK_BLUE) 
         textRectSettingsTitle = textSurfaceSettingsTitle.get_rect()
         textRectSettingsTitle.center = (400, 100)
 
         fontSoundSubt = pygame.font.Font('freesansbold.ttf', 35)
-        textSurfaceSoundSubt = fontSoundSubt.render('Sound:', True, LIGHT_GREY) 
+        textSurfaceSoundSubt = fontSoundSubt.render('Sound:', True, DARK_BLUE) 
         textRectSoundSubt = textSurfaceSoundSubt.get_rect()
         textRectSoundSubt.center = (200, 200)
 
