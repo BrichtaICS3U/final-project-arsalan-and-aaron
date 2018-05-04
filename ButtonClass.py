@@ -15,6 +15,7 @@ DARK_GREY = (44, 66, 63)
 BUTTON1 = (148, 155, 150)
 BUTTON2 = (130, 145, 145)
 BUTTON3 = (76, 91, 97)
+YELLOW = (254, 215, 10)
 
 SCREENWIDTH = 800
 SCREENHEIGHT = 800
@@ -134,21 +135,22 @@ clock = pygame.time.Clock()
 
 #buttons on layer one
 #feel free to change any of the settings to your fancy
-button_01 = Button("PLAY", (SCREENWIDTH/2, SCREENHEIGHT/3 ), Hello,BUTTON1)
-button_04 = Button("SETTINGS",(SCREENWIDTH/2, SCREENHEIGHT/3 + 100),my_next_function,BUTTON2)#transfers the screen to layer 2
-button_03 = Button("QUIT", (SCREENWIDTH/2, SCREENHEIGHT/3 + 200), my_quit_function, BUTTON3)#terminates the program
+button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Hello,BUTTON1)
+button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Hello,BUTTON1)
+button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170),my_next_function,BUTTON2)#transfers the screen to layer 2
+button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_function, BUTTON3)#terminates the program
 
 
 #buttons on layer two
 #feel free to change any of the settings to your fancy
 #i didn't add colour to the on and off button cause i had no idea what you wanted so i left that for you#
-button_02 = Button("BACK", (SCREENWIDTH/2, SCREENHEIGHT/3 + 200), my_previous_function,BUTTON3)#returns to layer 1
-button_ON = Button("ON", (((SCREENWIDTH/6)*2) + 60, SCREENHEIGHT/3 + 100), sound_ON,BUTTON2, size=(45, 50))#turns sound on
-button_OFF = Button("OFF",(((SCREENWIDTH/6)*3) + 70, SCREENHEIGHT/3 + 100), sound_OFF,BUTTON2, size=(45, 50))#turns sound off
+button_05 = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_previous_function,BUTTON3)#returns to layer 1
+button_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), sound_ON,BUTTON2, size=(45, 50))#turns sound on
+button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF,BUTTON2, size=(45, 50))#turns sound off
 
 #arrange button groups depending on level
-level1_buttons = [button_01, button_03, button_04]
-level2_buttons = [button_02,button_ON,button_OFF]
+level1_buttons = [button_01, button_02, button_03, button_04]
+level2_buttons = [button_05,button_ON,button_OFF]
 
 
 #---------Main Program Loop----------
@@ -166,13 +168,14 @@ while carryOn:
     # Clear the screen to white
     screen.blit(background, (0, 0))
 
+    screen.fill(YELLOW)
     # Draw buttons
     if level == 1:
         for button in level1_buttons:
             button.draw()
         #Title
-        fontTitle = pygame.font.Font('freesansbold.ttf', 32)
-        textSurfaceTitle = fontTitle.render('summative', True, LIGHT_GREY) 
+        fontTitle = pygame.font.Font('freesansbold.ttf', 50)
+        textSurfaceTitle = fontTitle.render('...', True, LIGHT_GREY) 
         textRectTitle = textSurfaceTitle.get_rect()
         textRectTitle.center = (400, 100)# I changed the height of the text because it was overlapping over the button
 
@@ -182,15 +185,15 @@ while carryOn:
         for button in level2_buttons:
             button.draw()
         #SettingsTitle
-        fontSettingsTitle = pygame.font.Font('freesansbold.ttf', 32)
+        fontSettingsTitle = pygame.font.Font('freesansbold.ttf', 50)
         textSurfaceSettingsTitle = fontSettingsTitle.render('Settings', True, LIGHT_GREY) 
         textRectSettingsTitle = textSurfaceSettingsTitle.get_rect()
         textRectSettingsTitle.center = (400, 100)
 
-        fontSoundSubt = pygame.font.Font('freesansbold.ttf', 28)
-        textSurfaceSoundSubt = fontSoundSubt.render('Sound', True, LIGHT_GREY) 
+        fontSoundSubt = pygame.font.Font('freesansbold.ttf', 35)
+        textSurfaceSoundSubt = fontSoundSubt.render('Sound:', True, LIGHT_GREY) 
         textRectSoundSubt = textSurfaceSoundSubt.get_rect()
-        textRectSoundSubt.center = (400, 250)
+        textRectSoundSubt.center = (200, 200)
 
         screen.blit(textSurfaceSoundSubt, textRectSoundSubt)
         screen.blit(textSurfaceSettingsTitle, textRectSettingsTitle)    
