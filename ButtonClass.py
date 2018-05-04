@@ -16,6 +16,7 @@ BUTTON1 = (148, 155, 150)
 BUTTON2 = (130, 145, 145)
 BUTTON3 = (76, 91, 97)
 YELLOW = (254, 215, 10)
+Background_colour = (239, 210, 203)
 
 SCREENWIDTH = 800
 SCREENHEIGHT = 800
@@ -96,9 +97,25 @@ def my_quit_function():
     pygame.quit()
     sys.exit()
 
-def Hello():
-    """this function will print out hello in the shell"""
-    print("Hello")
+def Play ():
+    global level
+    level = 3
+
+def Back_Menu():
+    global level
+    level = 1
+
+def Easy():
+    print("You clicked easy!")
+
+def Medium():
+    print("You clicked medium!")
+
+def Hard():
+    print("You clicked hard!")
+
+def Instructions():
+    print("You clicked instructions!")
 
 def sound_ON():
     """this will turn the sound on"""
@@ -133,24 +150,28 @@ clock = pygame.time.Clock()
 
 #create button objects
 
-#buttons on layer one
-#feel free to change any of the settings to your fancy
-button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Hello,BUTTON1)
-button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Hello,BUTTON1)
-button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170),my_next_function,BUTTON2)#transfers the screen to layer 2
+#buttons in the Main Menu (level 1)
+button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
+button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
+button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
 button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_function, BUTTON3)#terminates the program
 
 
-#buttons on layer two
-#feel free to change any of the settings to your fancy
-#i didn't add colour to the on and off button cause i had no idea what you wanted so i left that for you#
-button_05 = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_previous_function,BUTTON3)#returns to layer 1
+#buttons in Settings (level 2)
+button_05 = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
 button_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), sound_ON,BUTTON2, size=(45, 50))#turns sound on
 button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF,BUTTON2, size=(45, 50))#turns sound off
+
+#buttons in Play (level 3)
+button_easy = Button("EASY", (SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200), Easy, BUTTON3)
+button_medium = Button("MEDIUM", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), Medium, BUTTON3)
+button_hard = Button("HARD", (SCREENWIDTH/2 + 200, SCREENHEIGHT/2 - 200), Hard, BUTTON3)
+button_back = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons = [button_05,button_ON,button_OFF]
+level3_buttons = [button_easy, button_medium, button_hard, button_back]
 
 
 #---------Main Program Loop----------
@@ -167,8 +188,6 @@ while carryOn:
 
     # Clear the screen to white
     screen.blit(background, (0, 0))
-
-    screen.fill(YELLOW)
     # Draw buttons
     if level == 1:
         for button in level1_buttons:
@@ -184,6 +203,7 @@ while carryOn:
     elif level == 2:
         for button in level2_buttons:
             button.draw()
+        screen.fill(Background_colour)
         #SettingsTitle
         fontSettingsTitle = pygame.font.Font('freesansbold.ttf', 50)
         textSurfaceSettingsTitle = fontSettingsTitle.render('Settings', True, LIGHT_GREY) 
@@ -196,7 +216,19 @@ while carryOn:
         textRectSoundSubt.center = (200, 200)
 
         screen.blit(textSurfaceSoundSubt, textRectSoundSubt)
-        screen.blit(textSurfaceSettingsTitle, textRectSettingsTitle)    
+        screen.blit(textSurfaceSettingsTitle, textRectSettingsTitle)
+
+    elif level == 3:
+        for button in level3_buttons:
+            button.draw()
+        screen.fill(Background_colour)
+        #Title
+        fontPlayTitle = pygame.font.Font('freesansbold.ttf', 50)
+        textSurfacePlayTitle = fontPlayTitle.render('Choose Difficulty', True, LIGHT_GREY) 
+        textRectPlayTitle = textSurfacePlayTitle.get_rect()
+        textRectPlayTitle.center = (400, 100)
+
+        screen.blit(textSurfacePlayTitle, textRectPlayTitle)
 
     
 
