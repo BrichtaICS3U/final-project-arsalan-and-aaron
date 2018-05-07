@@ -253,6 +253,24 @@ while carryOn:
         for button in level4_buttons:
             button.draw()
         #Title/Text
+        fontInstructionsTitle = pygame.font.Font('freesansbold.ttf', 50)
+        textSurfaceInstructionsTitle = fontInstructionsTitle.render('Instructions', True, DARK_BLUE) 
+        textRectInstructionsTitle = textSurfaceInstructionsTitle.get_rect()
+        textRectInstructionsTitle.center = (400, 100)
+
+        fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceTextTitle = fontTextTitle.render('', True, DARK_BLUE) 
+        textRectTextTitle = textSurfaceTextTitle.get_rect()
+        textRectTextTitle.center = (400, 200)
+
+        fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceTextTitle = fontTextTitle.render('', True, DARK_BLUE) 
+        textRectTextTitle = textSurfaceTextTitle.get_rect()
+        textRectTextTitle.center = (400, 200)
+        
+        screen.blit(textSurfaceTextTitle, textRectTextTitle)
+        screen.blit(textSurfaceTextTitle, textRectTextTitle)
+        screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
     
 
