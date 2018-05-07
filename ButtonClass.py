@@ -259,17 +259,17 @@ while carryOn:
         textRectInstructionsTitle.center = (400, 100)
 
         fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceTextTitle = fontTextTitle.render('', True, DARK_BLUE) 
+        textSurfaceTextTitle = fontTextTitle.render('This is a target aiming game to improve your reaction time and aim', True, DARK_BLUE) 
         textRectTextTitle = textSurfaceTextTitle.get_rect()
         textRectTextTitle.center = (400, 200)
 
-        fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceTextTitle = fontTextTitle.render('', True, DARK_BLUE) 
-        textRectTextTitle = textSurfaceTextTitle.get_rect()
-        textRectTextTitle.center = (400, 200)
+        fontText2Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText2Title = fontText2Title.render('with a mouse. Click the appearing targets before they disappear.', True, DARK_BLUE) 
+        textRectText2Title = textSurfaceText2Title.get_rect()
+        textRectText2Title.center = (390, 230)
         
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
-        screen.blit(textSurfaceTextTitle, textRectTextTitle)
+        screen.blit(textSurfaceText2Title, textRectText2Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
     
