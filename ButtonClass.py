@@ -107,6 +107,10 @@ def Back_Menu():
     global level
     level = 1
 
+def Instructions():
+    global level
+    level = 4
+
 def Easy():
     "easy"
     print("You clicked easy!")
@@ -118,9 +122,6 @@ def Medium():
 def Hard():
     "hard"
     print("You clicked hard!")
-
-def Instructions():
-    print("You clicked instructions!")
 
 def sound_ON():
     """this will turn the sound on"""
@@ -150,6 +151,10 @@ def mousebuttondown(level):
         for button in level3_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+    elif level == 4:
+        for button in level4_buttons:
+            if button.rect.collidepoint(pos):
+                button.call_back()
 
 level = 1
 carryOn = True
@@ -165,7 +170,7 @@ button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_functi
 
 
 #buttons in Settings (level 2)
-button_05 = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
+button_05 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
 button_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), sound_ON, BUTTON2, size=(45, 50))#turns sound on
 button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF,BUTTON2, size=(45, 50))#turns sound off
 
@@ -174,13 +179,17 @@ button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF
 button_easy = Button("EASY", (SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200), Easy, BUTTON3)
 button_medium = Button("MEDIUM", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), Medium, BUTTON3)
 button_hard = Button("HARD", (SCREENWIDTH/2 + 200, SCREENHEIGHT/2 - 200), Hard, BUTTON3)
-button_back = Button("BACK", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+
+#buttons in Instructions (level 4)
+button_menu2 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons = [button_05, button_ON, button_OFF]
-level3_buttons = [button_easy, button_medium, button_hard, button_back]
-
+level3_buttons = [button_easy, button_medium, button_hard, button_menu]
+level4_buttons = [button_menu, button_play2]
 
 #---------Main Program Loop----------
 while carryOn:
@@ -238,6 +247,12 @@ while carryOn:
         textRectPlayTitle.center = (400, 100)
 
         screen.blit(textSurfacePlayTitle, textRectPlayTitle)
+
+    elif level == 4:
+        screen.fill(Background_colour)
+        for button in level4_buttons:
+            button.draw()
+        #Title/Text
 
     
 
