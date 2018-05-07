@@ -267,9 +267,33 @@ while carryOn:
         textSurfaceText2Title = fontText2Title.render('with a mouse. Click the appearing targets before they disappear.', True, DARK_BLUE) 
         textRectText2Title = textSurfaceText2Title.get_rect()
         textRectText2Title.center = (390, 230)
+
+        fontText3Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText3Title = fontText3Title.render('Each harder difficulty decreases button pop-up time,', True, DARK_BLUE) 
+        textRectText3Title = textSurfaceText3Title.get_rect()
+        textRectText3Title.center = (330, 260)
+
+        fontText4Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText4Title = fontText4Title.render('so a higher reaction and better aiming is needed for harder levels.', True, DARK_BLUE) 
+        textRectText4Title = textSurfaceText4Title.get_rect()
+        textRectText4Title.center = (395, 290)
+
+        fontText5Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText5Title = fontText5Title.render('You have three strikes, targets will keep appearing and disappearing', True, DARK_BLUE) 
+        textRectText5Title = textSurfaceText5Title.get_rect()
+        textRectText5Title.center = (395, 350)
+
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText6Title = fontText6Title.render('until you miss three targets, once you miss three targets, the game is over.', True, DARK_BLUE) 
+        textRectText6Title = textSurfaceText6Title.get_rect()
+        textRectText6Title.center = (395, 380)
         
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
         screen.blit(textSurfaceText2Title, textRectText2Title)
+        screen.blit(textSurfaceText3Title, textRectText3Title)
+        screen.blit(textSurfaceText4Title, textRectText4Title)
+        screen.blit(textSurfaceText5Title, textRectText5Title)
+        screen.blit(textSurfaceText6Title, textRectText6Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
     
