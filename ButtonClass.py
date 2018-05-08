@@ -227,6 +227,7 @@ while carryOn:
     screen.blit(background, (0, 0))
 
     # Draw buttons
+    #Menu
     if level == 1:
         for button in level1_buttons:
             button.draw()
@@ -238,6 +239,7 @@ while carryOn:
 
         screen.blit(textSurfaceTitle, textRectTitle)
     
+    #Settings
     elif level == 2:
         screen.fill(Title_Background)
         for button in level2_buttons:
@@ -256,6 +258,7 @@ while carryOn:
         screen.blit(textSurfaceSoundSubt, textRectSoundSubt)
         screen.blit(textSurfaceSettingsTitle, textRectSettingsTitle)
 
+    #Play
     elif level == 3:
         screen.fill(Background_colour)
         for button in level3_buttons:
@@ -268,6 +271,7 @@ while carryOn:
 
         screen.blit(textSurfacePlayTitle, textRectPlayTitle)
 
+    #Instructions
     elif level == 4:
         screen.fill(Background_colour)
         for button in level4_buttons:
@@ -292,6 +296,7 @@ while carryOn:
         screen.blit(textSurfaceText2Title, textRectText2Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
+    #Easy
     elif level == 5:
         screen.fill(Background_colour)
         all_sprites_list.update()
