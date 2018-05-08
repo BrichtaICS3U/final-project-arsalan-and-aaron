@@ -1,7 +1,7 @@
 # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
-import pygame, sys
+import pygame, sys, random
 from TargetClass import Target
 pygame.init()
 # Define some colours
@@ -73,6 +73,7 @@ class Button():
 
         self.call_back_ = action
 
+        
     def draw(self):
         self.mouseover()
 
@@ -221,7 +222,8 @@ while carryOn:
             mousebuttondown(level)
         
 
-    # --- Draw code goes here
+    # --- Game logic goes here
+
 
     # Clear the screen to white
     screen.blit(background, (0, 0))
@@ -301,7 +303,8 @@ while carryOn:
         screen.fill(Background_colour)
         all_sprites_list.update()
         all_sprites_list.draw(screen)
-        
+
+       
 
     
 
