@@ -18,6 +18,7 @@ BUTTON3 = (76, 91, 97)
 YELLOW = (254, 215, 10)
 Background_colour = (239, 210, 203)
 DARK_BLUE = (7, 59, 76)
+Title_Background = (225, 206, 122)
 
 
 SCREENWIDTH = 800
@@ -123,6 +124,10 @@ def Hard():
     "hard"
     print("You clicked hard!")
 
+def Custom():
+    "Custom"
+    print("You clicked Custom!")
+
 def sound_ON():
     """this will turn the sound on"""
     print("sound ON")
@@ -133,7 +138,7 @@ def sound_OFF():
     """this will turn the sound off"""
     print("sound OFF")
     pygame.mixer.pause()
-    
+
    
 
 def mousebuttondown(level):
@@ -179,16 +184,20 @@ button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF
 button_easy = Button("EASY", (SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200), Easy, BUTTON3)
 button_medium = Button("MEDIUM", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), Medium, BUTTON3)
 button_hard = Button("HARD", (SCREENWIDTH/2 + 200, SCREENHEIGHT/2 - 200), Hard, BUTTON3)
+button_Custom = Button ("CUSTOM",(SCREENWIDTH/2, SCREENHEIGHT/2 -100),  Custom, BUTTON3)
 button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+#button_Custom = Button ("CUSTOM",(SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200),  Custom, BUTTON3)
 
 #buttons in Instructions (level 4)
 button_menu2 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
+#buttons in Custom Settings (level 6)
+
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons = [button_05, button_ON, button_OFF]
-level3_buttons = [button_easy, button_medium, button_hard, button_menu]
+level3_buttons = [button_easy, button_medium, button_hard, button_menu, button_Custom]
 level4_buttons = [button_menu, button_play2]
 
 #---------Main Program Loop----------
@@ -219,7 +228,7 @@ while carryOn:
         screen.blit(textSurfaceTitle, textRectTitle)
     
     elif level == 2:
-        screen.fill(Background_colour)
+        screen.fill(Title_Background)
         for button in level2_buttons:
             button.draw()
         #SettingsTitle
