@@ -2,8 +2,8 @@
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
 import pygame, sys
+from TargetClass import Target
 pygame.init()
-from Target import Target
 # Define some colours
 WHITE = (255, 255, 255)
 GRAY = (127, 127, 127)
@@ -33,7 +33,17 @@ background = pygame.image.load("Target.png")
 #pygame.mixer.music.load('Cricket.mp3')
 #pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
 
+#------GAME
+all_sprites_list = pygame.sprite.Group()
 
+clickTarget = Target(RED, 20, 20)
+clickTarget.rect.x = 200
+clickTarget.rect.y = 200
+
+all_sprites_list.add(clickTarget)
+
+
+# -----MENU
 class Button():
     """This is a class for a generic button.
     
@@ -114,6 +124,8 @@ def Instructions():
 def Easy():
     "easy"
     print("You clicked easy!")
+    global level
+    level = 5
 
 def Medium():
     "medium"
@@ -134,8 +146,6 @@ def sound_OFF():
     print("sound OFF")
     pygame.mixer.pause()
     
-   
-
 def mousebuttondown(level):
     """A function that checks which button was pressed"""
     pos = pygame.mouse.get_pos()
@@ -184,6 +194,8 @@ button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, B
 #buttons in Instructions (level 4)
 button_menu2 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
+
+#Easy mode = level 5
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
@@ -271,6 +283,12 @@ while carryOn:
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
         screen.blit(textSurfaceText2Title, textRectText2Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
+
+    elif level == 5:
+        screen.fill(Background_colour)
+        all_sprites_list.update()
+        all_sprites_list.draw(screen)
+        
 
     
 
