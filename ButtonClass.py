@@ -28,6 +28,7 @@ screen = pygame.display.set_mode(size)
 
 #background
 background = pygame.image.load("Target.png")
+pygame.display.set_caption("Aim Trainer")
 
 #music
 #pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
@@ -35,13 +36,13 @@ background = pygame.image.load("Target.png")
 #pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
 
 #------GAME
-all_sprites_list = pygame.sprite.Group()
+#TARGETS = pygame.sprite.Group()
 
-clickTarget = Target(RED, 20, 20)
-clickTarget.rect.x = 200
-clickTarget.rect.y = 200
+#clickTarget = Target(RED, 20, 20)
+#clickTarget.rect.x = 200
+#clickTarget.rect.y = 200
 
-all_sprites_list.add(clickTarget)
+#TARGETS.add(clickTarget)
 
 
 # -----MENU
@@ -283,19 +284,43 @@ while carryOn:
         textSurfaceInstructionsTitle = fontInstructionsTitle.render('Instructions', True, DARK_BLUE) 
         textRectInstructionsTitle = textSurfaceInstructionsTitle.get_rect()
         textRectInstructionsTitle.center = (400, 100)
-
+ 
         fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceTextTitle = fontTextTitle.render('This is a target aiming game to improve your reaction time and aim', True, DARK_BLUE) 
         textRectTextTitle = textSurfaceTextTitle.get_rect()
         textRectTextTitle.center = (400, 200)
-
+ 
         fontText2Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText2Title = fontText2Title.render('with a mouse. Click the appearing targets before they disappear.', True, DARK_BLUE) 
         textRectText2Title = textSurfaceText2Title.get_rect()
         textRectText2Title.center = (390, 230)
-        
+ 
+        fontText3Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText3Title = fontText3Title.render('Each harder difficulty decreases button pop-up time, so a higher', True, DARK_BLUE) 
+        textRectText3Title = textSurfaceText3Title.get_rect()
+        textRectText3Title.center = (330, 280)
+ 
+        fontText4Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText4Title = fontText4Title.render('reaction and better aiming is needed for harder levels. You have', True, DARK_BLUE) 
+        textRectText4Title = textSurfaceText4Title.get_rect()
+        textRectText4Title.center = (395, 310)
+ 
+        fontText5Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText5Title = fontText5Title.render('three strikes, targets will keep appearing and disappearing until you', True, DARK_BLUE) 
+        textRectText5Title = textSurfaceText5Title.get_rect()
+        textRectText5Title.center = (395, 340)
+ 
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText6Title = fontText6Title.render('miss three targets, once you miss three targets, the game is over.', True, DARK_BLUE) 
+        textRectText6Title = textSurfaceText6Title.get_rect()
+        textRectText6Title.center = (395, 370)
+         
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
         screen.blit(textSurfaceText2Title, textRectText2Title)
+        screen.blit(textSurfaceText3Title, textRectText3Title)
+        screen.blit(textSurfaceText4Title, textRectText4Title)
+        screen.blit(textSurfaceText5Title, textRectText5Title)
+        screen.blit(textSurfaceText6Title, textRectText6Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
     #Easy
@@ -303,7 +328,18 @@ while carryOn:
         screen.fill(Background_colour)
         all_sprites_list.update()
         all_sprites_list.draw(screen)
+        for i in range(120):
+            myTarget = Target(RED, 10,10, random.randint(5,20))
+            myTarget.rect.x = random.randint(0,400)
+            myTarget.rect.y = random.randint(0,400)
+            TARGET.add(myTarget)
 
+        for snow in SNOW:
+            snow.moveBackward(8)
+            if snow.rect.y > SCREENHEIGHT:
+                snow.changeSpeed(random.randint(5,20))
+                snow.rect.y = -200
+                snow.rect.x = random.randint(0,400)
        
 
     

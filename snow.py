@@ -2,6 +2,7 @@ import pygame
 WHITE = (255, 255, 255)
 BLACK =(0,0,0)
 RED =(255, 0, 0)
+
 class Snow(pygame.sprite.Sprite):
 
     def __init__(self, color, width, height, speed):
