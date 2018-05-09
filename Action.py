@@ -9,7 +9,7 @@
 import pygame, random
 from snow import Snow
 pygame.init()
-background = pygame.image.load("Images/Window.png")
+background = pygame.image.load("Target.png")
 # Define some colours
 # Colours are defined using RGB values
 BLACK = (0, 0, 0)

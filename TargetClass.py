@@ -18,7 +18,12 @@ class Target(pygame.sprite.Sprite):
          self.color = color
          self.speed = speed
 
-         pygame.draw.ellipse(self.image, RED, [100, 100, 50, 50])
+         pygame.draw.ellipse(self.image, RED, [0, 0, 50, 50])
 
          self.rect = self.image.get_rect()
 
+    def moveDown(self, speed):
+        self.rect.y += self.speed * speed / 20
+
+    def changeSpeed(self, speed):
+        self.speed = speed

@@ -36,6 +36,14 @@ pygame.display.set_caption("Aim Trainer")
 #pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
 
 #------GAME
+TARGET = pygame.sprite.Group()
+for i in range(120):
+    myTarget = Target(RED, 10,10, random.randint(5,20))
+    myTarget.rect.x = random.randint(0,400)
+    myTarget.rect.y = random.randint(0,400)
+    TARGET.add(myTarget)
+
+
 #TARGETS = pygame.sprite.Group()
 
 #clickTarget = Target(RED, 20, 20)
@@ -65,7 +73,7 @@ class Button():
         self.size = size
 
         self.font = pygame.font.SysFont(font_name, font_size)
-        self.txt = txt
+        self.txt = txt #text
         self.txt_surf = self.font.render(self.txt, 1, self.fg)
         self.txt_rect = self.txt_surf.get_rect(center=[s//2 for s in self.size])
 
@@ -326,20 +334,15 @@ while carryOn:
     #Easy
     elif level == 5:
         screen.fill(Background_colour)
-        all_sprites_list.update()
-        all_sprites_list.draw(screen)
-        for i in range(120):
-            myTarget = Target(RED, 10,10, random.randint(5,20))
-            myTarget.rect.x = random.randint(0,400)
-            myTarget.rect.y = random.randint(0,400)
-            TARGET.add(myTarget)
+        speed = 1
+        for target in TARGET:
+            target.moveDown(8)
+            if target.rect.y > SCREENHEIGHT:
+                target.changeSpeed(random.randint(5,20))
+                target.rect.y = -200
+                target.rect.x = random.randint(0,400)
 
-        for snow in SNOW:
-            snow.moveBackward(8)
-            if snow.rect.y > SCREENHEIGHT:
-                snow.changeSpeed(random.randint(5,20))
-                snow.rect.y = -200
-                snow.rect.x = random.randint(0,400)
+        TARGET.draw(screen)
        
 
     
