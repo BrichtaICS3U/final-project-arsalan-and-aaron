@@ -37,10 +37,10 @@ pygame.display.set_caption("Aim Trainer")
 
 #------GAME
 TARGET = pygame.sprite.Group()
-for i in range(120):
-    myTarget = Target(RED, 10,10, random.randint(5,20))
-    myTarget.rect.x = random.randint(0,400)
-    myTarget.rect.y = random.randint(0,400)
+for i in range(3):
+    myTarget = Target(RED, 100,100, random.randint(5,20))
+    myTarget.rect.x = random.randint(0,800)
+    myTarget.rect.y = random.randint(0,800)
     TARGET.add(myTarget)
 
 
@@ -334,14 +334,13 @@ while carryOn:
     #Easy
     elif level == 5:
         screen.fill(Background_colour)
-        speed = 1
         for target in TARGET:
-            target.moveDown(8)
+            #target.moveDown(8)
             if target.rect.y > SCREENHEIGHT:
                 target.changeSpeed(random.randint(5,20))
                 target.rect.y = -200
                 target.rect.x = random.randint(0,400)
-
+            if 
         TARGET.draw(screen)
        
 
