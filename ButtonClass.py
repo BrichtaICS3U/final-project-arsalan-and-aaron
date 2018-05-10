@@ -161,6 +161,16 @@ def sound_OFF():
     print("sound OFF")
     pygame.mixer.pause()
 
+def music_ON():
+        "This will turn the music ON"""
+        print("Music ON")
+        pygame.mixer.unpause()
+
+def music_OFF():
+    "This will turn the music off"
+    print("Music OFF")
+    pygame.mixer.unpause
+
 def mousebuttondown(level):
     """A function that checks which button was pressed"""
     pos = pygame.mouse.get_pos()
@@ -187,7 +197,7 @@ clock = pygame.time.Clock()
 
 #create button objects
 
-#buttons in the Main Menu (level 1)
+#buttons in t he Main Menu (level 1)
 button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
 button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
 button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
@@ -198,7 +208,8 @@ button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_functi
 button_05 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
 button_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), sound_ON, BUTTON2, size=(45, 50))#turns sound on
 button_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 200), sound_OFF,BUTTON2, size=(45, 50))#turns sound off
-
+button2_ON = Button("ON", (SCREENWIDTH/2, SCREENHEIGHT/2 - 100), music_ON, BUTTON2, size=(45, 50))#turns Music on
+button2_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 100), music_OFF,BUTTON2, size=(45, 50))#turns Music off
 
 #buttons in Play (level 3)
 button_easy = Button("EASY", (SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200), Easy, BUTTON3)
@@ -208,7 +219,7 @@ button_Custom = Button ("CUSTOM",(SCREENWIDTH/2, SCREENHEIGHT/2 -100),  Custom, 
 button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 
 #buttons in Instructions (level 4)
-button_menu2 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+button_menu2 =  Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
 #Easy mode = level 5
@@ -217,7 +228,7 @@ button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play,
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
-level2_buttons = [button_05, button_ON, button_OFF]
+level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu, button_Custom]
 level4_buttons = [button_menu, button_play2]
 
@@ -230,7 +241,7 @@ while carryOn:
         elif event.type == pygame.MOUSEBUTTONDOWN: # Player clicked the mouse
             mousebuttondown(level)
         
-
+ 
     # --- Game logic goes here
 
 
@@ -266,8 +277,14 @@ while carryOn:
         textRectSoundSubt = textSurfaceSoundSubt.get_rect()
         textRectSoundSubt.center = (200, 200)
 
+        fontMusicTitle = pygame.font.Font('freesansbold.ttf', 35)
+        textSurfaceMusicTitle = fontMusicTitle.render('Music:', True, DARK_BLUE) 
+        textRectMusicTitle = textSurfaceMusicTitle.get_rect()
+        textRectMusicTitle.center = (195, 300)
+
         screen.blit(textSurfaceSoundSubt, textRectSoundSubt)
         screen.blit(textSurfaceSettingsTitle, textRectSettingsTitle)
+        screen.blit(textSurfaceMusicTitle, textRectMusicTitle)
 
     #Play
     elif level == 3:
@@ -340,7 +357,7 @@ while carryOn:
                 target.changeSpeed(random.randint(5,20))
                 target.rect.y = -200
                 target.rect.x = random.randint(0,400)
-            if 
+             
         TARGET.draw(screen)
        
 
