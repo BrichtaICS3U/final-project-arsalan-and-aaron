@@ -38,10 +38,19 @@ pygame.display.set_caption("Aim Trainer")
 #------GAME
 TARGET = pygame.sprite.Group()
 for i in range(3):
-    myTarget = Target(RED, 100,100, random.randint(5,20))
-    myTarget.rect.x = random.randint(0,800)
-    myTarget.rect.y = random.randint(0,800)
+    myTarget = Target(RED, 100, 100, random.randint(5,20))
+    myTarget.rect.x = random.randint(50,750)
+    myTarget.rect.y = random.randint(50,750)
     TARGET.add(myTarget)
+
+    ev = pygame.event.get()
+    for event in ev:
+        if event.type == pygame.MOUSEBUTTONDOWN:
+          pos = pygame.mouse.get_pos()
+
+          clicked_sprites = [s for s in sprites if s.rect.collidepoint(pos)]
+          print ("You clicked a target!")
+
 
 
 #TARGETS = pygame.sprite.Group()
@@ -340,7 +349,7 @@ while carryOn:
                 target.changeSpeed(random.randint(5,20))
                 target.rect.y = -200
                 target.rect.x = random.randint(0,400)
-            if 
+           
         TARGET.draw(screen)
        
 
