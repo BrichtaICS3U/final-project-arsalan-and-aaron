@@ -38,9 +38,9 @@ pygame.display.set_caption("Aim Trainer")
 #------GAME
 TARGET = pygame.sprite.Group()
 for i in range(3):
-    myTarget = Target(RED, 100, 100, random.randint(5,20))
-    myTarget.rect.x = random.randint(50,750)
-    myTarget.rect.y = random.randint(50,750)
+    myTarget = Target(RED, 100, 100, random.randint(5, 20))
+    myTarget.rect.x = random.randint(50, 750)
+    myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
 
 
@@ -91,10 +91,6 @@ class Button():
     def call_back(self):
         """Runs a function when clicked"""
         self.call_back_()
-
-def my_shell_function():
-    """A generic function that prints something in the shell"""
-    print('Fire the nukes!')
 
 def my_next_function():
     """A function that advances to the next level"""
@@ -181,6 +177,11 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+    elif level == 5:
+        for Target in TARGET:
+            if Target.rect.collidepoint(pos):
+                pygame.quit()
+                sys.exit()
 
 level = 1
 carryOn = True
@@ -339,7 +340,7 @@ while carryOn:
         screen.blit(textSurfaceText6Title, textRectText6Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
-    #Easy
+    #Easy Mode
     elif level == 5:
         screen.fill(Background_colour)
         for target in TARGET:
