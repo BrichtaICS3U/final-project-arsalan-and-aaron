@@ -6,7 +6,7 @@ Background_colour = (239, 210, 203)
 
 class Target(pygame.sprite.Sprite):
 
-    def __init__(self, color, width, height, speed,):
+    def __init__(self, color, width, height, speed, action):
 
          super().__init__()
 
@@ -19,7 +19,7 @@ class Target(pygame.sprite.Sprite):
          self.color = color
          self.speed = speed
 
-         #self.call_back_ = action
+         self.call_back_ = action
 
          pygame.draw.ellipse(self.image, RED, [0, 0, 50, 50])
          pygame.draw.ellipse(self.image, WHITE, [8, 8, 35, 35])
@@ -33,12 +33,6 @@ class Target(pygame.sprite.Sprite):
     def changeSpeed(self, speed):
         self.speed = speed
 
-    #def mouseover(self):
-        #"""Checks if mouse is over button using rect collision"""
-        #pos = pygame.mouse.get_pos()
-        #if self.rect.collidepoint(pos):
-            #self.bg = GRAY  # mouseover color
-
-    #def call_back(self):
-        #"""Runs a function when clicked"""
-        #self.call_back_()
+    def call_back(self):
+        """Runs a function when clicked"""
+        self.call_back_()

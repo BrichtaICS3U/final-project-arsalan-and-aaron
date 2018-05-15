@@ -179,9 +179,10 @@ def mousebuttondown(level):
                 button.call_back()
     elif level == 5:
         for Target in TARGET:
+            score = 0
             if Target.rect.collidepoint(pos):
-                pygame.quit()
-                sys.exit()
+                score += 1
+                print ("Your score is", (score), "!")
 
 level = 1
 carryOn = True
