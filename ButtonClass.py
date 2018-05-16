@@ -194,7 +194,8 @@ def mousebuttondown(level):
             if Target.rect.collidepoint(pos):
                 score += 1
                 print ("Your score is", (score), "!")
-            elif Background.rect.collidepoint(pos):
+        for Background in BACKGROUND:
+            if Background.rect.collidepoint(pos):
                 lives -= 1
                 print ("You missed!")
                 print ("You have", (lives), "lives")
@@ -320,37 +321,37 @@ while carryOn:
         textSurfaceInstructionsTitle = fontInstructionsTitle.render('Instructions', True, DARK_BLUE) 
         textRectInstructionsTitle = textSurfaceInstructionsTitle.get_rect()
         textRectInstructionsTitle.center = (400, 100)
- 
+  
         fontTextTitle = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceTextTitle = fontTextTitle.render('This is a target aiming game to improve your reaction time and aim', True, DARK_BLUE) 
         textRectTextTitle = textSurfaceTextTitle.get_rect()
         textRectTextTitle.center = (400, 200)
- 
+  
         fontText2Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText2Title = fontText2Title.render('with a mouse. Click the appearing targets before they disappear.', True, DARK_BLUE) 
         textRectText2Title = textSurfaceText2Title.get_rect()
         textRectText2Title.center = (390, 230)
- 
+  
         fontText3Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText3Title = fontText3Title.render('Each harder difficulty decreases button pop-up time, so a higher', True, DARK_BLUE) 
         textRectText3Title = textSurfaceText3Title.get_rect()
         textRectText3Title.center = (330, 280)
- 
+  
         fontText4Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText4Title = fontText4Title.render('reaction and better aiming is needed for harder levels. You have', True, DARK_BLUE) 
         textRectText4Title = textSurfaceText4Title.get_rect()
         textRectText4Title.center = (395, 310)
- 
+  
         fontText5Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText5Title = fontText5Title.render('three strikes, targets will keep appearing and disappearing until you', True, DARK_BLUE) 
         textRectText5Title = textSurfaceText5Title.get_rect()
         textRectText5Title.center = (395, 340)
- 
+  
         fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
         textSurfaceText6Title = fontText6Title.render('miss three targets, once you miss three targets, the game is over.', True, DARK_BLUE) 
         textRectText6Title = textSurfaceText6Title.get_rect()
         textRectText6Title.center = (395, 370)
-         
+          
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
         screen.blit(textSurfaceText2Title, textRectText2Title)
         screen.blit(textSurfaceText3Title, textRectText3Title)
