@@ -2,7 +2,9 @@
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
 import pygame, sys, random
-from TargetClass import Target
+from Classes import Target
+from Classes import Background
+
 pygame.init()
 # Define some colours
 WHITE = (255, 255, 255)
@@ -42,7 +44,15 @@ for i in range(3):
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
+    score = 0
 
+BACKGROUND = pygame.sprite.Group()
+for i in range(1):
+    myBackground = Background(Background_colour, 800, 800)
+    myBackground.rect.x = 0
+    myBackground.rect.x = 0
+    BACKGROUND.add(myBackground)
+    lives = 3
 
 # -----MENU
 class Button():
@@ -178,11 +188,19 @@ def mousebuttondown(level):
             if button.rect.collidepoint(pos):
                 button.call_back()
     elif level == 5:
+        score = 0
+        lives = 3
         for Target in TARGET:
-            score = 0
             if Target.rect.collidepoint(pos):
                 score += 1
                 print ("Your score is", (score), "!")
+            elif Background.rect.collidepoint(pos):
+                lives -= 1
+                print ("You missed!")
+                print ("You have", (lives), "lives")
+                if lives == 0:
+                    print ("No more lives! Game over.")
+                    Back_Menu()
 
 level = 1
 carryOn = True
@@ -344,6 +362,7 @@ while carryOn:
     #Easy Mode
     elif level == 5:
         screen.fill(Background_colour)
+        BACKGROUND.draw(screen)
         for target in TARGET:
             #target.moveDown(8)
             if target.rect.y > SCREENHEIGHT:

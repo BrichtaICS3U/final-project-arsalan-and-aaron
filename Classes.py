@@ -6,7 +6,7 @@ Background_colour = (239, 210, 203)
 
 class Target(pygame.sprite.Sprite):
 
-    def __init__(self, color, width, height, speed, action):
+    def __init__(self, color, width, height, speed):
 
          super().__init__()
 
@@ -19,7 +19,7 @@ class Target(pygame.sprite.Sprite):
          self.color = color
          self.speed = speed
 
-         self.call_back_ = action
+         #self.call_back_ = action
 
          pygame.draw.ellipse(self.image, RED, [0, 0, 50, 50])
          pygame.draw.ellipse(self.image, WHITE, [8, 8, 35, 35])
@@ -35,4 +35,28 @@ class Target(pygame.sprite.Sprite):
 
     def call_back(self):
         """Runs a function when clicked"""
+        self.call_back_()
+
+
+#-------
+
+class Background(pygame.sprite.Sprite):
+
+    def __init__ (self, color, width, height):
+
+         super().__init__()
+
+         self.image = pygame.Surface([width, height]) 
+         self.image.fill(WHITE)
+         self.image.set_colorkey(WHITE)
+
+         self.width = width
+         self.height = height
+         self.color = color
+
+         pygame.draw.rect(self.image, Background_colour, [0, 0, 800, 800])
+
+         self.rect = self.image.get_rect()
+
+    def call_back(self):
         self.call_back_()
