@@ -21,6 +21,7 @@ YELLOW = (254, 215, 10)
 Background_colour = (239, 210, 203)
 DARK_BLUE = (7, 59, 76)
 Title_Background = (225, 206, 122)
+Background2 = (194, 248, 203)
 
 
 SCREENWIDTH = 800
@@ -313,7 +314,7 @@ while carryOn:
 
     #Instructions
     elif level == 4:
-        screen.fill(Background_colour)
+        screen.fill(Background2)
         for button in level4_buttons:
             button.draw()
         #Title/Text
