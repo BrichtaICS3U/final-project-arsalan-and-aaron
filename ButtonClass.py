@@ -4,7 +4,7 @@
 import pygame, sys, random
 from Classes import Target
 from Classes import Background
-
+from Classes import TargetSmall
 pygame.init()
 # Define some colours
 WHITE = (255, 255, 255)
