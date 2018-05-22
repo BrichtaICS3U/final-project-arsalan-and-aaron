@@ -1,8 +1,6 @@
 # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
-Hit = False
-
 import pygame, sys, random
 from Classes import Target
 from Classes import Background
@@ -41,21 +39,26 @@ pygame.display.set_caption("Aim Trainer")
 #pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
 
 #------GAME
+
+score = 0 #variable for game score
+lives = 3 #variable for lives
+   
 TARGET = pygame.sprite.Group()
 for i in range(3):
     myTarget = Target(RED, 100, 100, random.randint(5, 20))
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
-    score = 0
+    
 
-BACKGROUND = pygame.sprite.Group()
-for i in range(1):
-    myBackground = Background(Background_colour, 800, 800)
-    myBackground.rect.x = 0
-    myBackground.rect.x = 0
-    BACKGROUND.add(myBackground)
-    lives = 3
+#probably don't need this -- Mr B
+#BACKGROUND = pygame.sprite.Group()
+#for i in range(1):
+#    myBackground = Background(Background_colour, 800, 800)
+#    myBackground.rect.x = 0
+#    myBackground.rect.x = 0
+#    BACKGROUND.add(myBackground)
+ 
 
 # -----MENU
 class Button():
@@ -172,8 +175,6 @@ def music_OFF():
     pygame.mixer.unpause
 
 def mousebuttondown(level):
-    global Hit
-    Hit = False
     """A function that checks which button was pressed"""
     pos = pygame.mouse.get_pos()
     if level == 1:
@@ -192,24 +193,25 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+                
 def mouseTargetdown(score, lives):
-    if level == 5:
-        score = 0
-        lives = 3
-        for Target in TARGET:
-            if Target.rect.collidepoint(pos):
-                Hit = True
-                score += 1
-                print ("Your score is", (score), "!")
-           
-        for Background in BACKGROUND:
-            if Background.rect.collidepoint(pos) and Hit == False:
-                lives -= 1
-                print ("You missed!")
-                print ("You have", (lives), "lives")
-                if lives == 0:
-                    print ("No more lives! Game over.")
-                    Back_Menu()
+    pos = pygame.mouse.get_pos()
+    Hit = False
+    for Target in TARGET:
+        if Target.rect.collidepoint(pos):
+            Hit = True
+            score += 1
+            print ("Your score is", (score), "!")
+
+    if Hit == False:
+        lives -= 1
+        print ("You missed!")
+        print ("You have", (lives), "lives")
+        if lives == 0:
+            print ("No more lives! Game over.")
+            Back_Menu()
+
+    return score, lives
                     
 
 level = 1
@@ -260,15 +262,21 @@ while carryOn:
         if event.type == pygame.QUIT: # Player clicked close button
             carryOn = False
         elif event.type == pygame.MOUSEBUTTONDOWN: # Player clicked the mouse
-            mousebuttondown(level)
+            if level < 5:
+                mousebuttondown(level)
+            else:
+                score, lives = mouseTargetdown(score, lives)
         
  
     # --- Game logic goes here
 
 
-    # Clear the screen to white
-    screen.blit(background, (0, 0))
 
+
+
+    # Draw background
+    screen.blit(background, (0, 0))
+    
     # Draw buttons
     #Menu
     if level == 1:
@@ -372,7 +380,8 @@ while carryOn:
     #Easy Mode
     elif level == 5:
         screen.fill(Background_colour)
-        BACKGROUND.draw(screen)
+        #probably don't need this
+        #BACKGROUND.draw(screen)
         for target in TARGET:
             #target.moveDown(8)
             if target.rect.y > SCREENHEIGHT:
