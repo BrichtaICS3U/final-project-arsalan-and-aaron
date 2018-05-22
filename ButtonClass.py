@@ -192,7 +192,8 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
-    elif level == 5:
+def mouseTargetdown(score, lives):
+    if level == 5:
         score = 0
         lives = 3
         for Target in TARGET:
@@ -200,7 +201,7 @@ def mousebuttondown(level):
                 Hit = True
                 score += 1
                 print ("Your score is", (score), "!")
-                
+           
         for Background in BACKGROUND:
             if Background.rect.collidepoint(pos) and Hit == False:
                 lives -= 1
@@ -391,4 +392,3 @@ while carryOn:
     clock.tick(60)
 
 pygame.quit()
-
