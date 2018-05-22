@@ -1,6 +1,8 @@
 # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
 
+Hit = False
+
 import pygame, sys, random
 from Classes import Target
 from Classes import Background
@@ -170,6 +172,8 @@ def music_OFF():
     pygame.mixer.unpause
 
 def mousebuttondown(level):
+    global Hit
+    Hit = False
     """A function that checks which button was pressed"""
     pos = pygame.mouse.get_pos()
     if level == 1:
@@ -194,17 +198,19 @@ def mouseTargetdown(score, lives):
         lives = 3
         for Target in TARGET:
             if Target.rect.collidepoint(pos):
+                Hit = True
                 score += 1
                 print ("Your score is", (score), "!")
-            elif 
-
-            #elif Background.rect.collidepoint(pos):
-                #lives -= 1
-                #print ("You missed!")
-                #print ("You have", (lives), "lives")
-                #if lives == 0:
-                    #print ("No more lives! Game over.")
-                    #Back_Menu()
+           
+        for Background in BACKGROUND:
+            if Background.rect.collidepoint(pos) and Hit == False:
+                lives -= 1
+                print ("You missed!")
+                print ("You have", (lives), "lives")
+                if lives == 0:
+                    print ("No more lives! Game over.")
+                    Back_Menu()
+                    
 
 level = 1
 carryOn = True
@@ -212,7 +218,7 @@ clock = pygame.time.Clock()
 
 #create button objects
 
-#buttons in t he Main Menu (level 1)
+#buttons in the Main Menu (level 1)
 button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
 button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
 button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
