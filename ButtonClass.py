@@ -1,7 +1,6 @@
 # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
-
-import pygame, sys, random
+import pygame, random, sys
 from Classes import Target
 from Classes import Background
 from Classes import TargetSmall
@@ -211,6 +210,9 @@ def mouseTargetdown(score, lives):
             print ("No more lives! Game over.")
             Back_Menu()
 
+    if Hit == True:
+        myTarget.rect.x = random.randint(50, 750)
+    myTarget.rect.y = random.randint(50, 750)
     return score, lives
                     
 
