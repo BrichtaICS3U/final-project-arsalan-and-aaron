@@ -201,8 +201,8 @@ def mouseTargetdown(score, lives):
             Hit = True
             score += 1
             print ("Your score is", (score), "!")
-            myTarget.rect.x = random.randint(50, 750)
-            myTarget.rect.y = random.randint(50, 750)
+            Target.rect.x = random.randint(50, 750)
+            Target.rect.y = random.randint(50, 750)
 
     if Hit == False:
         lives -= 1
