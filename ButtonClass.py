@@ -210,6 +210,8 @@ def mouseTargetdown(score, lives):
         if lives == 0:
             print ("No more lives! Game over.")
             Back_Menu()
+            lives = 3
+            score = 0
 
     return score, lives
                     
@@ -284,7 +286,7 @@ while carryOn:
             button.draw()
         #Title
         fontTitle = pygame.font.Font('freesansbold.ttf', 50)
-        textSurfaceTitle = fontTitle.render('...', True, DARK_BLUE) 
+        textSurfaceTitle = fontTitle.render('Aim Trainer', True, DARK_BLUE) 
         textRectTitle = textSurfaceTitle.get_rect()
         textRectTitle.center = (400, 100)# I changed the height of the text because it was overlapping over the button
 
