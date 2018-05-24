@@ -1,5 +1,6 @@
 # Menu template with button class and basic menu navigation
 # Adapted from http://www.dreamincode.net/forums/topic/401541-buttons-and-sliders-in-pygame/
+
 import pygame, random, sys
 from Classes import Target
 from Classes import Background
@@ -38,7 +39,7 @@ pygame.display.set_caption("Aim Trainer")
 #pygame.mixer.music.play(-1) #-1 means loops for ever, 0 means play just once)
 
 #------GAME
-
+global score
 score = 0 #variable for game score
 lives = 3 #variable for lives
    
@@ -388,7 +389,7 @@ while carryOn:
     elif level == 5:
         screen.fill(Background_colour)
         #probably don't need this
-        #BACKGROUND.draw(screen)
+        #BACKGROUND.draw(screen)        
         for target in TARGET:
             #target.moveDown(8)
             if target.rect.y > SCREENHEIGHT:
@@ -397,7 +398,11 @@ while carryOn:
                 target.rect.x = random.randint(0,400)
 
         TARGET.draw(screen)
-       
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText6Title = fontText6Title.render(str(score), True, DARK_BLUE) 
+        textRectText6Title = textSurfaceText6Title.get_rect()
+        textRectText6Title.center = (395, 370)
+        screen.blit(textSurfaceText6Title, textRectText6Title)
 
     
 
