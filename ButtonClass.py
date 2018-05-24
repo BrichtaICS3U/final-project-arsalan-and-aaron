@@ -22,7 +22,7 @@ Background_colour = (239, 210, 203)
 DARK_BLUE = (7, 59, 76)
 Title_Background = (225, 206, 122)
 Background2 = (194, 248, 203)
-
+Background3 = (127, 183, 190)
 
 SCREENWIDTH = 800
 SCREENHEIGHT = 800
@@ -388,7 +388,7 @@ while carryOn:
 
     #Easy Mode
     elif level == 5:
-        screen.fill(Background_colour)
+        screen.fill(Background3)
         #probably don't need this
         #BACKGROUND.draw(screen)        
         for target in TARGET:
@@ -399,27 +399,27 @@ while carryOn:
                 target.rect.x = random.randint(0,400)
 
         TARGET.draw(screen)
-        fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText6Title = fontText6Title.render(str(score), True, DARK_BLUE) 
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText6Title = fontText6Title.render(str(score), True, WHITE) 
         textRectText6Title = textSurfaceText6Title.get_rect()
         textRectText6Title.center = (750, 35)
         screen.blit(textSurfaceText6Title, textRectText6Title)
 
         fontScoreTitle = pygame.font.Font('freesansbold.ttf', 26)
-        textSurfaceScoreTitle = fontScoreTitle.render('SCORE:', True, DARK_BLUE) 
+        textSurfaceScoreTitle = fontScoreTitle.render('SCORE:', True, WHITE) 
         textRectScoreTitle = textSurfaceScoreTitle.get_rect()
         textRectScoreTitle.center = (675, 35)
         screen.blit(textSurfaceScoreTitle, textRectScoreTitle)
 
         TARGET.draw(screen)
-        fontText7Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText7Title = fontText7Title.render(str(lives), True, DARK_BLUE) 
+        fontText7Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText7Title = fontText7Title.render(str(lives), True, WHITE) 
         textRectText7Title = textSurfaceText7Title.get_rect()
         textRectText7Title.center = (755, 770)
         screen.blit(textSurfaceText7Title, textRectText7Title)
 
         fontScore2Title = pygame.font.Font('freesansbold.ttf', 26)
-        textSurfaceScore2Title = fontScore2Title.render('LIVES:', True, DARK_BLUE) 
+        textSurfaceScore2Title = fontScore2Title.render('LIVES:', True, WHITE) 
         textRectScore2Title = textSurfaceScore2Title.get_rect()
         textRectScore2Title.center = (695, 770)
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
