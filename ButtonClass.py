@@ -202,7 +202,7 @@ def mouseTargetdown(score, lives):
         if Target.rect.collidepoint(pos):
             Hit = True
             score += 1
-            print ("Your score is", (score), "!")
+           # print ("Your score is", (score), "!")
             Target.rect.x = random.randint(50, 750)
             Target.rect.y = random.randint(50, 750)
 
