@@ -209,9 +209,9 @@ def mouseTargetdown(score, lives):
     if Hit == False:
         lives -= 1
         #print ("You missed!")
-        print ("You have", (lives), "lives")
+       # print ("You have", (lives), "lives")
         if lives == 0:
-            print ("No more lives! Game over.")
+          #  print ("No more lives! Game over.")
             Back_Menu()
             lives = 3
             score = 0
