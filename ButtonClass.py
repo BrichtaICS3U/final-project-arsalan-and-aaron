@@ -46,7 +46,7 @@ mlives = 2
    
 TARGET = pygame.sprite.Group()
 for i in range(3):
-    myTarget = Target(RED, 100, 100, random.randint(5, 20))
+    myTarget = Target(RED, 150, 150, random.randint(5, 20))
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
