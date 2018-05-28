@@ -3,8 +3,6 @@
 
 import pygame, random, sys
 from Classes import Target
-from Classes import Background
-from Classes import TargetSmall
 pygame.init()
 # Define some colours
 WHITE = (255, 255, 255)
@@ -43,6 +41,8 @@ global score
 global lives
 score = 0 #variable for game score
 lives = 3 #variable for lives
+mscore = 0
+mlives = 2
    
 TARGET = pygame.sprite.Group()
 for i in range(3):
@@ -50,16 +50,13 @@ for i in range(3):
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
-    
 
-#probably don't need this -- Mr B
-#BACKGROUND = pygame.sprite.Group()
-#for i in range(1):
-#    myBackground = Background(Background_colour, 800, 800)
-#    myBackground.rect.x = 0
-#    myBackground.rect.x = 0
-#    BACKGROUND.add(myBackground)
- 
+MTARGET = pygame.sprite.Group()
+for i in range (2):
+    myMtarget = Target(RED, 100, 100, random.randint(5, 20))
+    myMtarget.rect.x = random.randint(50, 750)
+    myMtarget.rect.y = random.randint(50, 750)
+    MTARGET.add(myMtarget)
 
 # -----MENU
 class Button():
@@ -145,6 +142,8 @@ def Easy():
 def Medium():
     "medium"
     print("You clicked medium!")
+    global level
+    level = 6
 
 def Hard():
     "hard"
@@ -195,7 +194,7 @@ def mousebuttondown(level):
             if button.rect.collidepoint(pos):
                 button.call_back()
                 
-def mouseTargetdown(score, lives):
+def mouseTargetdown(score, lives, mscore, mlives):
     pos = pygame.mouse.get_pos()
     Hit = False
     for Target in TARGET:
@@ -205,21 +204,36 @@ def mouseTargetdown(score, lives):
            # print ("Your score is", (score), "!")
             Target.rect.x = random.randint(50, 750)
             Target.rect.y = random.randint(50, 750)
+    for Mtarget in MTARGET:
+        if Mtarget.rect.collidepoint(pos):
+            Hit = True
+            mscore += 1
+            Mtarget.rect.x = random.randint(50, 750)
+            Mtarget.rect.y = random.randint(50, 750)
 
     if Hit == False:
         lives -= 1
+        mlives -= 1
         #print ("You missed!")
        # print ("You have", (lives), "lives")
-        if lives == 0:
+        if level == 5 and lives == 0:
           #  print ("No more lives! Game over.")
             Back_Menu()
-            lives = 3
             score = 0
+            lives = 3
+            mscore = 0
+            mlives = 2
+        if level == 6 and mlives == 0:
+            Back_Menu()
+            score = 0
+            lives = 3
+            mscore = 0
+            mlives = 2
 
     #if Hit == True:
         #myTarget.rect.x = random.randint(50, 750)
         #myTarget.rect.y = random.randint(50, 750)
-    return score, lives
+    return score, lives, mscore, mlives
                     
 
 level = 1
@@ -274,13 +288,10 @@ while carryOn:
             if level < 5:
                 mousebuttondown(level)
             else:
-                score, lives = mouseTargetdown(score, lives)
+                score, lives, mscore, mlives = mouseTargetdown(score, lives, mscore, mlives)
         
  
     # --- Game logic goes here
-
-
-
 
 
     # Draw background
@@ -388,15 +399,12 @@ while carryOn:
 
     #Easy Mode
     elif level == 5:
-        screen.fill(Background3)
-        #probably don't need this
-        #BACKGROUND.draw(screen)        
+        screen.fill(Background3)     
         for target in TARGET:
-            #target.moveDown(8)
             if target.rect.y > SCREENHEIGHT:
-                target.changeSpeed(random.randint(5,20))
+                target.changeSpeed(random.randint(5, 20))
                 target.rect.y = -200
-                target.rect.x = random.randint(0,400)
+                target.rect.x = random.randint(0, 400)
 
         TARGET.draw(screen)
         fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
@@ -414,6 +422,41 @@ while carryOn:
         TARGET.draw(screen)
         fontText7Title = pygame.font.Font('freesansbold.ttf', 26)
         textSurfaceText7Title = fontText7Title.render(str(lives), True, WHITE) 
+        textRectText7Title = textSurfaceText7Title.get_rect()
+        textRectText7Title.center = (755, 770)
+        screen.blit(textSurfaceText7Title, textRectText7Title)
+
+        fontScore2Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceScore2Title = fontScore2Title.render('LIVES:', True, WHITE) 
+        textRectScore2Title = textSurfaceScore2Title.get_rect()
+        textRectScore2Title.center = (695, 770)
+        screen.blit(textSurfaceScore2Title, textRectScore2Title)
+
+    #Medium Mode
+    elif level == 6:
+        screen.fill(Background3)
+        for mtarget in MTARGET:
+            if mtarget.rect.y > SCREENHEIGHT:
+                mtarget.changeSpeed(random.randint(5, 20))
+                mtarget.rect.y = -200
+                mtarget.rect.x = random.randint(0, 400)
+                
+        MTARGET.draw(screen)
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText6Title = fontText6Title.render(str(mscore), True, WHITE) 
+        textRectText6Title = textSurfaceText6Title.get_rect()
+        textRectText6Title.center = (750, 35)
+        screen.blit(textSurfaceText6Title, textRectText6Title)
+
+        fontScoreTitle = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceScoreTitle = fontScoreTitle.render('SCORE:', True, WHITE) 
+        textRectScoreTitle = textSurfaceScoreTitle.get_rect()
+        textRectScoreTitle.center = (675, 35)
+        screen.blit(textSurfaceScoreTitle, textRectScoreTitle)
+
+        TARGET.draw(screen)
+        fontText7Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText7Title = fontText7Title.render(str(mlives), True, WHITE) 
         textRectText7Title = textSurfaceText7Title.get_rect()
         textRectText7Title.center = (755, 770)
         screen.blit(textSurfaceText7Title, textRectText7Title)
