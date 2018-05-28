@@ -41,15 +41,15 @@ class Target(pygame.sprite.Sprite):
 
 
 
-class TargetSmall(pygame.sprite.Sprite):
+class TargetMedium(pygame.sprite.Sprite):
 
     def __init__(self, color, width, height, speed):
 
          super().__init__()
 
          self.image = pygame.Surface([width, height]) 
-         self.image.fill(WHITE)
-         self.image.set_colorkey(WHITE)
+         self.image.fill(BLACK)
+         self.image.set_colorkey(BLACK)
 
          self.width = width
          self.height = height
@@ -58,9 +58,9 @@ class TargetSmall(pygame.sprite.Sprite):
 
          #self.call_back_ = action
 
-         pygame.draw.ellipse(self.image, RED, [0, 0, 25, 25])
-         pygame.draw.ellipse(self.image, WHITE, [4, 4, 17, 17])
-         pygame.draw.ellipse(self.image, RED, [7, 7, 10, 10])
+         pygame.draw.ellipse(self.image, RED, [0, 0, 50, 50])
+         pygame.draw.ellipse(self.image, WHITE, [8, 8, 35, 35])
+         pygame.draw.ellipse(self.image, RED, [15, 15, 20, 20])
 
          self.rect = self.image.get_rect()
 
@@ -73,6 +73,12 @@ class TargetSmall(pygame.sprite.Sprite):
     def call_back(self):
         """Runs a function when clicked"""
         self.call_back_()
+
+    def movRight (self):
+        speed = 2
+        self.rect.x += self.speed
+        if self.rect.x > SCREENWIDTH:
+            self.rect.x = -100
 #-------
 
 class Background(pygame.sprite.Sprite):

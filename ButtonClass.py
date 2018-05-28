@@ -4,7 +4,7 @@
 import pygame, random, sys
 from Classes import Target
 from Classes import Background
-from Classes import TargetSmall
+from Classes import TargetMedium
 pygame.init()
 # Define some colours
 WHITE = (255, 255, 255)
@@ -253,10 +253,10 @@ button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, B
 button_menu2 =  Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
-#Easy mode = level 5
+#buttons in Easy (level 5)
 
 
-#buttons in Custom Settings (level 6)
+#buttons in Medium (level 6)
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
@@ -425,7 +425,10 @@ while carryOn:
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
         
 
-        
+
+    #Medium Mode
+    elif level == 6:
+        screen.fill(Background3)
 
     # Update the screen with queued shapes
     pygame.display.flip()
