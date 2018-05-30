@@ -42,9 +42,9 @@ global lives
 score = 0 #variable for game score
 lives = 3 #variable for lives
 mscore = 0
-mlives = 2
+mlives = 3
 hscore = 0
-hlives = 1
+hlives = 3
    
 TARGET = pygame.sprite.Group()
 for i in range(3):
@@ -54,14 +54,14 @@ for i in range(3):
     TARGET.add(myTarget)
 
 MTARGET = pygame.sprite.Group()
-for i in range (2):
+for i in range (3):
     myMtarget = Target(RED, 100, 100, random.randint(5, 20))
     myMtarget.rect.x = random.randint(50, 750)
     myMtarget.rect.y = random.randint(50, 750)
     MTARGET.add(myMtarget)
 
 HTARGET = pygame.sprite.Group()
-for i in range (1):
+for i in range (3):
     myHtarget = Target(RED, 75, 75, random.randint(5, 20))
     myHtarget.rect.x = random.randint(50, 750)
     myHtarget.rect.y = random.randint(50, 750)
@@ -333,6 +333,7 @@ while carryOn:
     # Draw buttons
     #Menu
     if level == 1:
+
         for button in level1_buttons:
             button.draw()
         #Title
