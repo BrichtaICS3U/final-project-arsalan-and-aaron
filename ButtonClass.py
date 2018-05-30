@@ -52,7 +52,7 @@ for i in range(3):
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
-
+    
 MTARGET = pygame.sprite.Group()
 for i in range (3):
     myMtarget = Target(RED, 100, 100, random.randint(5, 20))
@@ -325,7 +325,9 @@ while carryOn:
         
  
     # --- Game logic goes here
-
+    for target in TARGET:
+        target.moveDown(1)
+        #target.moveRight(1)
 
     # Draw background
     screen.blit(background, (0, 0))

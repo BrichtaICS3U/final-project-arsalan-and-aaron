@@ -27,7 +27,7 @@ class Target(pygame.sprite.Sprite):
          self.rect = self.image.get_rect()
 
     def moveDown(self, speed):
-        self.rect.y += self.speed * speed / 20
+        self.rect.y += 5 * (speed*1)
 
     def changeSpeed(self, speed):
         self.speed = speed
