@@ -18,9 +18,8 @@ class Target(pygame.sprite.Sprite):
          self.height = height
          self.color = color
          self.speed = speed
-
-         #self.call_back_ = action
-
+         
+         
          pygame.draw.ellipse(self.image, RED, [0, 0, 50, 50])
          pygame.draw.ellipse(self.image, WHITE, [8, 8, 35, 35])
          pygame.draw.ellipse(self.image, RED, [15, 15, 20, 20])

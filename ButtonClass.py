@@ -43,6 +43,8 @@ score = 0 #variable for game score
 lives = 3 #variable for lives
 mscore = 0
 mlives = 2
+hscore = 0
+hlives = 1
    
 TARGET = pygame.sprite.Group()
 for i in range(3):
@@ -57,6 +59,13 @@ for i in range (2):
     myMtarget.rect.x = random.randint(50, 750)
     myMtarget.rect.y = random.randint(50, 750)
     MTARGET.add(myMtarget)
+
+HTARGET = pygame.sprite.Group()
+for i in range (1):
+    myHtarget = Target(RED, 75, 75, random.randint(5, 20))
+    myHtarget.rect.x = random.randint(50, 750)
+    myHtarget.rect.y = random.randint(50, 750)
+    HTARGET.add(myHtarget)
 
 # -----MENU
 class Button():
@@ -148,6 +157,8 @@ def Medium():
 def Hard():
     "hard"
     print("You clicked hard!")
+    global level
+    level = 7
 
 def Custom():
     "Custom"
@@ -194,7 +205,7 @@ def mousebuttondown(level):
             if button.rect.collidepoint(pos):
                 button.call_back()
                 
-def mouseTargetdown(score, lives, mscore, mlives):
+def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
     pos = pygame.mouse.get_pos()
     Hit = False
     for Target in TARGET:
@@ -211,29 +222,51 @@ def mouseTargetdown(score, lives, mscore, mlives):
             Mtarget.rect.x = random.randint(50, 750)
             Mtarget.rect.y = random.randint(50, 750)
 
+    for Htarget in HTARGET:
+        if Htarget.rect.collidepoint(pos):
+            Hit = True
+            hscore += 1
+            Htarget.rect.x = random.randint(50, 750)
+            Htarget.rect.y = random.randint(50, 750)
+
     if Hit == False:
         lives -= 1
         mlives -= 1
+        hlives -= 1
         #print ("You missed!")
        # print ("You have", (lives), "lives")
         if level == 5 and lives == 0:
-          #  print ("No more lives! Game over.")
+            print ("No more lives! Game over.")
             Back_Menu()
             score = 0
             lives = 3
             mscore = 0
             mlives = 2
+            hscore = 0
+            hlives = 1
         if level == 6 and mlives == 0:
+            print ("No more lives! Game over.")
             Back_Menu()
             score = 0
             lives = 3
             mscore = 0
             mlives = 2
+            hscore = 0
+            hlives = 1
+        if level == 7 and hlives == 0:
+            print ("No missed! Game over.")
+            Back_Menu()
+            score = 0
+            lives = 3
+            mscore = 0
+            mlives = 2
+            hscore = 0
+            hlives = 1
 
     #if Hit == True:
         #myTarget.rect.x = random.randint(50, 750)
         #myTarget.rect.y = random.randint(50, 750)
-    return score, lives, mscore, mlives
+    return score, lives, mscore, mlives, hscore, hlives
                     
 
 level = 1
@@ -288,7 +321,7 @@ while carryOn:
             if level < 5:
                 mousebuttondown(level)
             else:
-                score, lives, mscore, mlives = mouseTargetdown(score, lives, mscore, mlives)
+                score, lives, mscore, mlives, hscore, hlives = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives)
         
  
     # --- Game logic goes here
@@ -365,29 +398,39 @@ while carryOn:
         textRectTextTitle.center = (400, 200)
   
         fontText2Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText2Title = fontText2Title.render('with a mouse. Click the appearing targets before they disappear.', True, DARK_BLUE) 
+        textSurfaceText2Title = fontText2Title.render('with a mouse. Click the targets and get a high score before time', True, DARK_BLUE) 
         textRectText2Title = textSurfaceText2Title.get_rect()
-        textRectText2Title.center = (390, 230)
-  
+        textRectText2Title.center = (385, 230)
+
         fontText3Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText3Title = fontText3Title.render('Each harder difficulty decreases button pop-up time, so a higher', True, DARK_BLUE) 
+        textSurfaceText3Title = fontText3Title.render('runs out.', True, DARK_BLUE) 
         textRectText3Title = textSurfaceText3Title.get_rect()
-        textRectText3Title.center = (330, 280)
+        textRectText3Title.center = (118, 260)
   
         fontText4Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText4Title = fontText4Title.render('reaction and better aiming is needed for harder levels. You have', True, DARK_BLUE) 
+        textSurfaceText4Title = fontText4Title.render('Each harder difficulty decreases the amount of lives and targets,', True, DARK_BLUE) 
         textRectText4Title = textSurfaceText4Title.get_rect()
-        textRectText4Title.center = (395, 310)
+        textRectText4Title.center = (390, 310)
   
         fontText5Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText5Title = fontText5Title.render('three strikes, targets will keep appearing and disappearing until you', True, DARK_BLUE) 
+        textSurfaceText5Title = fontText5Title.render('so a higher reaction and better aiming is needed for harder levels.', True, DARK_BLUE) 
         textRectText5Title = textSurfaceText5Title.get_rect()
         textRectText5Title.center = (395, 340)
   
         fontText6Title = pygame.font.Font('freesansbold.ttf', 20)
-        textSurfaceText6Title = fontText6Title.render('miss three targets, once you miss three targets, the game is over.', True, DARK_BLUE) 
+        textSurfaceText6Title = fontText6Title.render('Targets will keep appearing and disappearing when clicked. Your', True, DARK_BLUE) 
         textRectText6Title = textSurfaceText6Title.get_rect()
-        textRectText6Title.center = (395, 370)
+        textRectText6Title.center = (390, 370)
+  
+        fontText7Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText7Title = fontText7Title.render('amount of lives is how many times you can miss, once you have no', True, DARK_BLUE) 
+        textRectText7Title = textSurfaceText7Title.get_rect()
+        textRectText7Title.center = (400, 400)
+
+        fontText8Title = pygame.font.Font('freesansbold.ttf', 20)
+        textSurfaceText8Title = fontText8Title.render('lives, the game is over.', True, DARK_BLUE) 
+        textRectText8Title = textSurfaceText8Title.get_rect()
+        textRectText8Title.center = (185, 430)
           
         screen.blit(textSurfaceTextTitle, textRectTextTitle)
         screen.blit(textSurfaceText2Title, textRectText2Title)
@@ -395,6 +438,8 @@ while carryOn:
         screen.blit(textSurfaceText4Title, textRectText4Title)
         screen.blit(textSurfaceText5Title, textRectText5Title)
         screen.blit(textSurfaceText6Title, textRectText6Title)
+        screen.blit(textSurfaceText7Title, textRectText7Title)
+        screen.blit(textSurfaceText8Title, textRectText8Title)
         screen.blit(textSurfaceInstructionsTitle, textRectInstructionsTitle)
 
     #Easy Mode
@@ -454,7 +499,6 @@ while carryOn:
         textRectScoreTitle.center = (675, 35)
         screen.blit(textSurfaceScoreTitle, textRectScoreTitle)
 
-        TARGET.draw(screen)
         fontText7Title = pygame.font.Font('freesansbold.ttf', 26)
         textSurfaceText7Title = fontText7Title.render(str(mlives), True, WHITE) 
         textRectText7Title = textSurfaceText7Title.get_rect()
@@ -466,7 +510,39 @@ while carryOn:
         textRectScore2Title = textSurfaceScore2Title.get_rect()
         textRectScore2Title.center = (695, 770)
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
-        
+
+    elif level == 7: 
+        screen.fill(Background3)
+        for htarget in HTARGET:
+            if htarget.rect.y > SCREENHEIGHT:
+                htarget.changeSpeed(random.randint(5, 20))
+                htarget.rect.y = -200
+                htarget.rect.x = random.randint(0, 400)
+                
+        HTARGET.draw(screen)
+        fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText6Title = fontText6Title.render(str(hscore), True, WHITE) 
+        textRectText6Title = textSurfaceText6Title.get_rect()
+        textRectText6Title.center = (750, 35)
+        screen.blit(textSurfaceText6Title, textRectText6Title)
+
+        fontScoreTitle = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceScoreTitle = fontScoreTitle.render('SCORE:', True, WHITE) 
+        textRectScoreTitle = textSurfaceScoreTitle.get_rect()
+        textRectScoreTitle.center = (675, 35)
+        screen.blit(textSurfaceScoreTitle, textRectScoreTitle)
+
+        fontText7Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText7Title = fontText7Title.render(str(hlives), True, WHITE) 
+        textRectText7Title = textSurfaceText7Title.get_rect()
+        textRectText7Title.center = (755, 770)
+        screen.blit(textSurfaceText7Title, textRectText7Title)
+
+        fontScore2Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceScore2Title = fontScore2Title.render('LIVES:', True, WHITE) 
+        textRectScore2Title = textSurfaceScore2Title.get_rect()
+        textRectScore2Title.center = (695, 770)
+        screen.blit(textSurfaceScore2Title, textRectScore2Title)
 
         
 
