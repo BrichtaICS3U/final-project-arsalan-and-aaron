@@ -45,7 +45,7 @@ mscore = 0
 mlives = 2
 hscore = 0
 hlives = 1
-   
+
 TARGET = pygame.sprite.Group()
 for i in range(3):
     myTarget = Target(RED, 150, 150, random.randint(5, 20))
@@ -212,13 +212,22 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
         if Target.rect.collidepoint(pos):
             Hit = True
             score += 1
-           # print ("Your score is", (score), "!")
+            
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Ding.mp3')
+            pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
+            
             Target.rect.x = random.randint(50, 750)
             Target.rect.y = random.randint(50, 750)
     for Mtarget in MTARGET:
         if Mtarget.rect.collidepoint(pos):
             Hit = True
             mscore += 1
+
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Ding.mp3')
+            pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
+
             Mtarget.rect.x = random.randint(50, 750)
             Mtarget.rect.y = random.randint(50, 750)
 
@@ -226,6 +235,11 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
+            
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Ding.mp3')
+            pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
+
             Htarget.rect.x = random.randint(50, 750)
             Htarget.rect.y = random.randint(50, 750)
 
@@ -322,6 +336,11 @@ while carryOn:
                 mousebuttondown(level)
             else:
                 score, lives, mscore, mlives, hscore, hlives = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives)
+                #if level == 5:
+                    #tart_ticks=pygame.time.get_ticks() #starter tick
+                    #seconds=(pygame.time.get_ticks()-start_ticks)/1000 #calculate how many seconds
+                    #if seconds>10:
+                        #Back_Menu
         
  
     # --- Game logic goes here
@@ -485,7 +504,8 @@ while carryOn:
                 mtarget.changeSpeed(random.randint(5, 20))
                 mtarget.rect.y = -200
                 mtarget.rect.x = random.randint(0, 400)
-                
+
+
         MTARGET.draw(screen)
         fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
         textSurfaceText6Title = fontText6Title.render(str(mscore), True, WHITE) 
