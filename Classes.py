@@ -29,6 +29,9 @@ class Target(pygame.sprite.Sprite):
     def moveDown(self, speed):
         self.rect.y += 5 * (speed*1)
 
+    def moveRight(self, speed):
+        self.rect.x += 5 * (speed *1)
+
     def changeSpeed(self, speed):
         self.speed = speed
 
@@ -73,7 +76,7 @@ class TargetMedium(pygame.sprite.Sprite):
         """Runs a function when clicked"""
         self.call_back_()
 
-    def movRight (self):
+    def moveRight (self):
         speed = 2
         self.rect.x += self.speed
         if self.rect.x > SCREENWIDTH:

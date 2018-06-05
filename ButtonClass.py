@@ -136,7 +136,7 @@ def Play ():
 
 def Back_Menu():
     global level
-    level = 1
+    level = 8
 
 def Instructions():
     global level
@@ -214,20 +214,20 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             score += 1
            # print ("Your score is", (score), "!")
             Target.rect.x = random.randint(50, 750)
-            Target.rect.y = random.randint(50, 750)
+            Target.rect.y = random.randint(-750, -50)
     for Mtarget in MTARGET:
         if Mtarget.rect.collidepoint(pos):
             Hit = True
             mscore += 1
             Mtarget.rect.x = random.randint(50, 750)
-            Mtarget.rect.y = random.randint(50, 750)
+            Mtarget.rect.y = random.randint(-500, -50)
 
     for Htarget in HTARGET:
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
             Htarget.rect.x = random.randint(50, 750)
-            Htarget.rect.y = random.randint(50, 750)
+            Htarget.rect.y = random.randint(-250, -50)
 
     if Hit == False:
         lives -= 1
@@ -264,7 +264,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             hlives = 1
 
     #if Hit == True:
-        #myTarget.rect.x = random.randint(50, 750)
+        #myTarget.rect.0.x = random.randint(50, 750)
         #myTarget.rect.y = random.randint(50, 750)
     return score, lives, mscore, mlives, hscore, hlives
                     
@@ -323,11 +323,17 @@ while carryOn:
             else:
                 score, lives, mscore, mlives, hscore, hlives = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives)
         
+
  
     # --- Game logic goes here
     for target in TARGET:
         target.moveDown(1)
-        #target.moveRight(1)
+
+    for target in MTARGET:
+        target.moveRight(1)
+        
+
+    
 
     # Draw background
     screen.blit(background, (0, 0))
@@ -547,8 +553,17 @@ while carryOn:
         textRectScore2Title.center = (695, 770)
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
 
-        
+    elif level == 8:
+        screen.fill(Background3)
+        font = pygame.font.Font('freesansbold.ttf', 26)
+        text1= font.render("GAME OVER! YOUR SCORE IS" ,1,DARK_BLUE)
+        screen.blit(text1,(400,100))
 
+
+        font = pygame.font.Font('freesansbold.ttf', 26)
+        text2= font.render(str(score) ,1,DARK_BLUE)
+        screen.blit(text2,(200,100))
+        
     # Update the screen with queued shapes
     pygame.display.flip()
 
