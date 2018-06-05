@@ -134,9 +134,15 @@ def Play ():
     global level
     level = 3
 
+
 def Back_Menu():
     global level
-    level = 8
+    level = 1
+
+
+def Back_Menus():
+    global level
+    level += 7
 
 def Instructions():
     global level
@@ -204,6 +210,11 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+
+    elif level == 8:
+        for button in level8_buttons:
+            if button.rect.collidepoint(pos):
+                button.call_back()
                 
 def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
     pos = pygame.mouse.get_pos()
@@ -220,14 +231,14 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             Hit = True
             mscore += 1
             Mtarget.rect.x = random.randint(50, 750)
-            Mtarget.rect.y = random.randint(-500, -50)
+            Mtarget.rect.y = random.randint(-750, -50)
 
     for Htarget in HTARGET:
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
             Htarget.rect.x = random.randint(50, 750)
-            Htarget.rect.y = random.randint(-250, -50)
+            Htarget.rect.y = random.randint(-750, -50)
 
     if Hit == False:
         lives -= 1
@@ -241,27 +252,27 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
         if level == 6 and mlives == 0:
             print ("No more lives! Game over.")
             Back_Menu()
             score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
         if level == 7 and hlives == 0:
             print ("No missed! Game over.")
             Back_Menu()
             score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
 
     #if Hit == True:
         #myTarget.rect.0.x = random.randint(50, 750)
@@ -280,7 +291,6 @@ button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
 button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
 button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
 button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_function, BUTTON3)#terminates the program
-
 
 #buttons in Settings (level 2)
 button_05 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
@@ -305,12 +315,15 @@ button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play,
 
 #buttons in Custom Settings (level 6)
 
+#buttons in Gameover screen (Level 8)
+button_menu1 =  Button("MENU1", (SCREENWIDTH/1, SCREENHEIGHT/2 + 230), Back_Menus, BUTTON3)
+
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu, button_Custom]
 level4_buttons = [button_menu, button_play2]
-
+level8_buttons = [button_menu1]
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -330,7 +343,10 @@ while carryOn:
         target.moveDown(1)
 
     for target in MTARGET:
-        target.moveRight(1)
+        target.moveDown(2)
+
+    for target in HTARGET:
+        target.moveDown(3)
         
 
     
@@ -557,12 +573,18 @@ while carryOn:
         screen.fill(Background3)
         font = pygame.font.Font('freesansbold.ttf', 26)
         text1= font.render("GAME OVER! YOUR SCORE IS" ,1,DARK_BLUE)
-        screen.blit(text1,(400,100))
+        screen.blit(text1,(200,100))
+        for button in level8_buttons:
+            button.draw()
+        #font = pygame.font.Font('freesansbold.ttf', 26)
+       # text2= font.render(str(score) ,1,DARK_BLUE)
+        #screen.blit(text2,(600,100))
 
-
-        font = pygame.font.Font('freesansbold.ttf', 26)
-        text2= font.render(str(score) ,1,DARK_BLUE)
-        screen.blit(text2,(200,100))
+        fontText9Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText9Title = fontText9Title.render(str(score), True, WHITE) 
+        textRectText9Title = textSurfaceText9Title.get_rect()
+        textRectText9Title.center = (600, 100)
+        screen.blit(textSurfaceText9Title, textRectText9Title)
         
     # Update the screen with queued shapes
     pygame.display.flip()
