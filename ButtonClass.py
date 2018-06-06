@@ -139,8 +139,7 @@ def Back_Menu():
     global level
     level = 1
 
-
-def Back_Menus():
+def Back():
     global level
     level += 7
 
@@ -216,7 +215,7 @@ def mousebuttondown(level):
             if button.rect.collidepoint(pos):
                 button.call_back()
                 
-def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
+def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
     pos = pygame.mouse.get_pos()
     Hit = False
     for Target in TARGET:
@@ -248,16 +247,18 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
        # print ("You have", (lives), "lives")
         if level == 5 and lives == 0:
             print ("No more lives! Game over.")
-            Back_Menu()
-            score = 0
+            #Back_Menu()
+            level = 8
+            #score = 0
             lives = 3
-            mscore = 0
+          #  mscore = 0
             mlives = 3
-            hscore = 0
+            #hscore = 0
             hlives = 3
         if level == 6 and mlives == 0:
             print ("No more lives! Game over.")
-            Back_Menu()
+            #Back_Menu()
+            level = 8
             score = 0
             lives = 3
             mscore = 0
@@ -266,7 +267,8 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             hlives = 3
         if level == 7 and hlives == 0:
             print ("No missed! Game over.")
-            Back_Menu()
+            #Back_Menu()
+            level = 8
             score = 0
             lives = 3
             mscore = 0
@@ -277,7 +279,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
     #if Hit == True:
         #myTarget.rect.0.x = random.randint(50, 750)
         #myTarget.rect.y = random.randint(50, 750)
-    return score, lives, mscore, mlives, hscore, hlives
+    return score, lives, mscore, mlives, hscore, hlives, level
                     
 
 level = 1
@@ -291,6 +293,7 @@ button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
 button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
 button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
 button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_function, BUTTON3)#terminates the program
+button_05 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back, BUTTON3)
 
 #buttons in Settings (level 2)
 button_05 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
@@ -316,14 +319,15 @@ button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play,
 #buttons in Custom Settings (level 6)
 
 #buttons in Gameover screen (Level 8)
-button_menu1 =  Button("MENU1", (SCREENWIDTH/1, SCREENHEIGHT/2 + 230), Back_Menus, BUTTON3)
+button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+button_playagain = Button("PLAY AGAIN", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu, button_Custom]
 level4_buttons = [button_menu, button_play2]
-level8_buttons = [button_menu1]
+level8_buttons = [button_menu, button_playagain]
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -334,7 +338,7 @@ while carryOn:
             if level < 5:
                 mousebuttondown(level)
             else:
-                score, lives, mscore, mlives, hscore, hlives = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives)
+                score, lives, mscore, mlives, hscore, hlives,level = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives,level)
         
 
  
@@ -347,6 +351,17 @@ while carryOn:
 
     for target in HTARGET:
         target.moveDown(3)
+
+    if lives == 0:
+        level == 8
+
+    elif mlives == 0:
+        level == 8
+
+    elif hlives == 0:
+        level == 8
+
+    
         
 
     
@@ -581,9 +596,9 @@ while carryOn:
         #screen.blit(text2,(600,100))
 
         fontText9Title = pygame.font.Font('freesansbold.ttf', 26)
-        textSurfaceText9Title = fontText9Title.render(str(score), True, WHITE) 
+        textSurfaceText9Title = fontText9Title.render(str(score), True, DARK_BLUE) 
         textRectText9Title = textSurfaceText9Title.get_rect()
-        textRectText9Title.center = (600, 100)
+        textRectText9Title.center = (610, 113)
         screen.blit(textSurfaceText9Title, textRectText9Title)
         
     # Update the screen with queued shapes
