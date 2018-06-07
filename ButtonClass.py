@@ -225,7 +225,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Target.rect.collidepoint(pos):
             Hit = True
             score += 1
-            print ("Your score is:", (score), "!")
+            #print ("Your score is:", (score), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -238,7 +238,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Mtarget.rect.collidepoint(pos):
             Hit = True
             mscore += 1
-            print ("Your score is:", (mscore), "!")
+            #print ("Your score is:", (mscore), "!")
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -251,7 +251,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
-            print ("Your score is:", (hscore), "!")
+            #print ("Your score is:", (hscore), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -363,9 +363,14 @@ level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu]
 level4_buttons = [button_menu, button_play2]
+<<<<<<< HEAD
 level8_buttons = [button_menu3, button_playagain1]
 level9_buttons = [button_menu4, button_playagain2]
 level10_buttons = [button_menu5, button_playagain3]
+=======
+level8_buttons = [button_menu, button_playagain]
+level9_buttons = [button_menu, button_playagain]
+>>>>>>> 12fc29ac9bce89f13f40b5207df4f4eaf6e0daf8
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -627,18 +632,18 @@ while carryOn:
 
     #Game Over Easy
     elif level == 8:
-        screen.fill(Background3)
+        screen.fill(WHITE)
         for button in level8_buttons:
             button.draw()
         
-        font = pygame.font.Font('freesansbold.ttf', 26)
-        text1= font.render("GAME OVER! YOUR SCORE IS" ,1,DARK_BLUE)
-        screen.blit(text1,(200,100))
+        font = pygame.font.Font('freesansbold.ttf', 45)
+        text1= font.render("GAME OVER! YOUR SCORE IS:" ,1,DARK_BLUE)
+        screen.blit(text1,(85,200))
 
-        fontText9Title = pygame.font.Font('freesansbold.ttf', 26)
+        fontText9Title = pygame.font.Font('freesansbold.ttf', 45)
         textSurfaceText9Title = fontText9Title.render(str(score), True, DARK_BLUE) 
         textRectText9Title = textSurfaceText9Title.get_rect()
-        textRectText9Title.center = (610, 113)
+        textRectText9Title.center = (400, 300)
         screen.blit(textSurfaceText9Title, textRectText9Title)
 
     #Game Over Medium
@@ -672,7 +677,7 @@ while carryOn:
         textRectText9Title = textSurfaceText9Title.get_rect()
         textRectText9Title.center = (610, 113)
         screen.blit(textSurfaceText9Title, textRectText9Title)
-        
+
     # Update the screen with queued shapes
     pygame.display.flip()
 
