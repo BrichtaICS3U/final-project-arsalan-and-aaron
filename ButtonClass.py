@@ -218,7 +218,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Target.rect.collidepoint(pos):
             Hit = True
             score += 1
-            print ("Your score is:", (score), "!")
+            #print ("Your score is:", (score), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -230,7 +230,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Mtarget.rect.collidepoint(pos):
             Hit = True
             mscore += 1
-            print ("Your score is:", (mscore), "!")
+            #print ("Your score is:", (mscore), "!")
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -243,7 +243,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
-            print ("Your score is:", (hscore), "!")
+            #print ("Your score is:", (hscore), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -371,13 +371,13 @@ while carryOn:
     # --- Game logic goes here
     
     for target in TARGET:
-        target.moveDown(1)
-
-    for target in MTARGET:
         target.moveDown(2)
 
-    for target in HTARGET:
+    for target in MTARGET:
         target.moveDown(3)
+
+    for target in HTARGET:
+        target.moveDown(4)
 
     if lives == 0:
         level == 8
@@ -619,14 +619,14 @@ while carryOn:
         for button in level8_buttons:
             button.draw()
         
-        font = pygame.font.Font('freesansbold.ttf', 26)
-        text1= font.render("GAME OVER! YOUR SCORE IS" ,1,DARK_BLUE)
-        screen.blit(text1,(200,100))
+        font = pygame.font.Font('freesansbold.ttf', 45)
+        text1= font.render("GAME OVER! YOUR SCORE IS:" ,1,DARK_BLUE)
+        screen.blit(text1,(85,200))
 
-        fontText9Title = pygame.font.Font('freesansbold.ttf', 26)
+        fontText9Title = pygame.font.Font('freesansbold.ttf', 45)
         textSurfaceText9Title = fontText9Title.render(str(score), True, DARK_BLUE) 
         textRectText9Title = textSurfaceText9Title.get_rect()
-        textRectText9Title.center = (610, 113)
+        textRectText9Title.center = (400, 300)
         screen.blit(textSurfaceText9Title, textRectText9Title)
         
     # Update the screen with queued shapes
