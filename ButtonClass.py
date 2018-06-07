@@ -42,9 +42,9 @@ global lives
 score = 0 #variable for game score
 lives = 3 #variable for lives
 mscore = 0
-mlives = 2
+mlives = 3
 hscore = 0
-hlives = 1
+hlives = 3
 
 TARGET = pygame.sprite.Group()
 for i in range(3):
@@ -52,16 +52,16 @@ for i in range(3):
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
-
+    
 MTARGET = pygame.sprite.Group()
-for i in range (2):
+for i in range (3):
     myMtarget = Target(RED, 100, 100, random.randint(5, 20))
     myMtarget.rect.x = random.randint(50, 750)
     myMtarget.rect.y = random.randint(50, 750)
     MTARGET.add(myMtarget)
 
 HTARGET = pygame.sprite.Group()
-for i in range (1):
+for i in range (3):
     myHtarget = Target(RED, 75, 75, random.randint(5, 20))
     myHtarget.rect.x = random.randint(50, 750)
     myHtarget.rect.y = random.randint(50, 750)
@@ -134,9 +134,14 @@ def Play ():
     global level
     level = 3
 
+
 def Back_Menu():
     global level
     level = 1
+
+def Back():
+    global level
+    level += 7
 
 def Instructions():
     global level
@@ -200,8 +205,13 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
+
+    elif level == 8:
+        for button in level8_buttons:
+            if button.rect.collidepoint(pos):
+                button.call_back()
                 
-def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
+def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
     pos = pygame.mouse.get_pos()
     Hit = False
     for Target in TARGET:
@@ -215,7 +225,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
             
             Target.rect.x = random.randint(50, 750)
-            Target.rect.y = random.randint(50, 750)
+            Target.rect.y = random.randint(-750, -50)
     for Mtarget in MTARGET:
         if Mtarget.rect.collidepoint(pos):
             Hit = True
@@ -227,7 +237,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
 
             Mtarget.rect.x = random.randint(50, 750)
-            Mtarget.rect.y = random.randint(50, 750)
+            Mtarget.rect.y = random.randint(-750, -50)
 
     for Htarget in HTARGET:
         if Htarget.rect.collidepoint(pos):
@@ -240,51 +250,55 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
 
             Htarget.rect.x = random.randint(50, 750)
-            Htarget.rect.y = random.randint(50, 750)
+            Htarget.rect.y = random.randint(-750, -50)
 
     if Hit == False:
         lives -= 1
         mlives -= 1
         hlives -= 1
-        #print ("You missed!")
-       # print ("You have", (lives), "lives")
+        pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+        pygame.mixer.music.load('Buzz.mp3')
+        pygame.mixer.music.play(0)
         if level == 5 and lives == 0:
             print ("No more lives! Game over.")
-            Back_Menu()
-            score = 0
+            #Back_Menu()
+            level = 8
+            #score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Buzz.mp3')
             pygame.mixer.music.play(0)
-            
+
         if level == 6 and mlives == 0:
             print ("No more lives! Game over.")
-            Back_Menu()
+            #Back_Menu()
+            level = 8
             score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Buzz.mp3')
             pygame.mixer.music.play(0)
-            
+
         if level == 7 and hlives == 0:
-            print ("You missed! Game over.")
-            Back_Menu()
+            print ("No more lives! Game over.")
+            #Back_Menu()
+            level = 8
             score = 0
             lives = 3
             mscore = 0
-            mlives = 2
+            mlives = 3
             hscore = 0
-            hlives = 1
+            hlives = 3
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Buzz.mp3')
@@ -292,9 +306,9 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             
 
     #if Hit == True:
-        #myTarget.rect.x = random.randint(50, 750)
+        #myTarget.rect.0.x = random.randint(50, 750)
         #myTarget.rect.y = random.randint(50, 750)
-    return score, lives, mscore, mlives, hscore, hlives
+    return score, lives, mscore, mlives, hscore, hlives, level
                     
 
 level = 1
@@ -308,7 +322,7 @@ button_01 = Button("PLAY", (SCREENWIDTH/8, SCREENHEIGHT/2 + 50 ), Play, BUTTON1)
 button_02 = Button("INSTRUCTIONS", (SCREENWIDTH/8, SCREENHEIGHT/2 + 110 ), Instructions, BUTTON1)
 button_03 = Button("SETTINGS",(SCREENWIDTH/8, SCREENHEIGHT/2 + 170), my_next_function, BUTTON2)#transfers the screen to layer 2
 button_04 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), my_quit_function, BUTTON3)#terminates the program
-
+button_05 = Button("QUIT", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back, BUTTON3)
 
 #buttons in Settings (level 2)
 button_05 = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)#returns to layer 1
@@ -330,14 +344,16 @@ button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play,
 #Easy mode = level 5
 
 
-#buttons in Custom Settings (level 6)
+#buttons in Gameover screen (Level 8)
+button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
+button_playagain = Button("PLAY AGAIN", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play, BUTTON3)
 
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu]
 level4_buttons = [button_menu, button_play2]
-
+level8_buttons = [button_menu, button_playagain]
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -345,19 +361,37 @@ while carryOn:
         if event.type == pygame.QUIT: # Player clicked close button
             carryOn = False
         elif event.type == pygame.MOUSEBUTTONDOWN: # Player clicked the mouse
-            if level < 5:
+            if level < 5 or level == 8:
                 mousebuttondown(level)
             else:
-                score, lives, mscore, mlives, hscore, hlives = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives)
-                #if level == 5:
-                    #tart_ticks=pygame.time.get_ticks() #starter tick
-                    #seconds=(pygame.time.get_ticks()-start_ticks)/1000 #calculate how many seconds
-                    #if seconds>10:
-                        #Back_Menu
+                score, lives, mscore, mlives, hscore, hlives,level = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives,level)
         
+
  
     # --- Game logic goes here
+    
+    for target in TARGET:
+        target.moveDown(1)
 
+    for target in MTARGET:
+        target.moveDown(2)
+
+    for target in HTARGET:
+        target.moveDown(3)
+
+    if lives == 0:
+        level == 8
+
+    elif mlives == 0:
+        level == 8
+
+    elif hlives == 0:
+        level == 8
+
+    
+        
+
+    
 
     # Draw background
     screen.blit(background, (0, 0))
@@ -365,6 +399,7 @@ while carryOn:
     # Draw buttons
     #Menu
     if level == 1:
+
         for button in level1_buttons:
             button.draw()
         #Title
@@ -544,6 +579,7 @@ while carryOn:
         textRectScore2Title.center = (695, 770)
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
 
+    #Hard Mode
     elif level == 7: 
         screen.fill(Background3)
         for htarget in HTARGET:
@@ -577,8 +613,22 @@ while carryOn:
         textRectScore2Title.center = (695, 770)
         screen.blit(textSurfaceScore2Title, textRectScore2Title)
 
+    #Game Over Screen
+    elif level == 8:
+        screen.fill(Background3)
+        for button in level8_buttons:
+            button.draw()
         
+        font = pygame.font.Font('freesansbold.ttf', 26)
+        text1= font.render("GAME OVER! YOUR SCORE IS" ,1,DARK_BLUE)
+        screen.blit(text1,(200,100))
 
+        fontText9Title = pygame.font.Font('freesansbold.ttf', 26)
+        textSurfaceText9Title = fontText9Title.render(str(score), True, DARK_BLUE) 
+        textRectText9Title = textSurfaceText9Title.get_rect()
+        textRectText9Title.center = (610, 113)
+        screen.blit(textSurfaceText9Title, textRectText9Title)
+        
     # Update the screen with queued shapes
     pygame.display.flip()
 
