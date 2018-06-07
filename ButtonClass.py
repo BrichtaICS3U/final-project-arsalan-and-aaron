@@ -354,6 +354,7 @@ level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
 level3_buttons = [button_easy, button_medium, button_hard, button_menu]
 level4_buttons = [button_menu, button_play2]
 level8_buttons = [button_menu, button_playagain]
+level9_buttons = [button_menu, button_playagain]
 #---------Main Program Loop----------
 while carryOn:
     # --- Main event loop ---
@@ -517,6 +518,7 @@ while carryOn:
                 target.changeSpeed(random.randint(5, 20))
                 target.rect.y = -200
                 target.rect.x = random.randint(0, 400)
+                
 
         TARGET.draw(screen)
         fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
@@ -552,6 +554,7 @@ while carryOn:
                 mtarget.changeSpeed(random.randint(5, 20))
                 mtarget.rect.y = -200
                 mtarget.rect.x = random.randint(0, 400)
+                
 
 
         MTARGET.draw(screen)
@@ -615,7 +618,7 @@ while carryOn:
 
     #Game Over Screen
     elif level == 8:
-        screen.fill(Background3)
+        screen.fill(WHITE)
         for button in level8_buttons:
             button.draw()
         
@@ -628,7 +631,8 @@ while carryOn:
         textRectText9Title = textSurfaceText9Title.get_rect()
         textRectText9Title.center = (400, 300)
         screen.blit(textSurfaceText9Title, textRectText9Title)
-        
+
+
     # Update the screen with queued shapes
     pygame.display.flip()
 
