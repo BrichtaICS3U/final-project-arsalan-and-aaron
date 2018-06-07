@@ -52,7 +52,7 @@ for i in range(3):
     myTarget.rect.x = random.randint(50, 750)
     myTarget.rect.y = random.randint(50, 750)
     TARGET.add(myTarget)
-    
+
 MTARGET = pygame.sprite.Group()
 for i in range (3):
     myMtarget = Target(RED, 100, 100, random.randint(5, 20))
@@ -96,7 +96,7 @@ class Button():
 
         self.call_back_ = action
 
-        
+
     def draw(self):
         self.mouseover()
 
@@ -205,7 +205,6 @@ def mousebuttondown(level):
         for button in level4_buttons:
             if button.rect.collidepoint(pos):
                 button.call_back()
-
     elif level == 8:
         for button in level8_buttons:
             if button.rect.collidepoint(pos):
@@ -224,8 +223,9 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
             pygame.mixer.music.load('Ding.mp3')
             pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
             
-            Target.rect.x = random.randint(50, 750)
-            Target.rect.y = random.randint(-750, -50)
+            Target.rect.x = random.randint(-750, -50)
+            Target.rect.y = random.randint(50, 750)
+            
     for Mtarget in MTARGET:
         if Mtarget.rect.collidepoint(pos):
             Hit = True
@@ -234,10 +234,10 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
-            pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
+            pygame.mixer.music.play(0)
 
-            Mtarget.rect.x = random.randint(50, 750)
-            Mtarget.rect.y = random.randint(-750, -50)
+            Mtarget.rect.x = random.randint(-750, -50)
+            Mtarget.rect.y = random.randint(50, 750)
 
     for Htarget in HTARGET:
         if Htarget.rect.collidepoint(pos):
@@ -247,10 +247,10 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
-            pygame.mixer.music.play(0) #  0 means play just once, -1 means loop forever)
+            pygame.mixer.music.play(0)
 
-            Htarget.rect.x = random.randint(50, 750)
-            Htarget.rect.y = random.randint(-750, -50)
+            Htarget.rect.x = random.randint(-750, -50)
+            Htarget.rect.y = random.randint(50, 750)
 
     if Hit == False:
         lives -= 1
@@ -259,6 +259,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
         pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
         pygame.mixer.music.load('Buzz.mp3')
         pygame.mixer.music.play(0)
+
         if level == 5 and lives == 0:
             print ("No more lives! Game over.")
             #Back_Menu()
@@ -304,12 +305,8 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level):
             pygame.mixer.music.load('Buzz.mp3')
             pygame.mixer.music.play(0)
             
-
-    #if Hit == True:
-        #myTarget.rect.0.x = random.randint(50, 750)
-        #myTarget.rect.y = random.randint(50, 750)
     return score, lives, mscore, mlives, hscore, hlives, level
-                    
+
 
 level = 1
 carryOn = True
@@ -364,20 +361,21 @@ while carryOn:
             if level < 5 or level == 8:
                 mousebuttondown(level)
             else:
-                score, lives, mscore, mlives, hscore, hlives,level = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives,level)
+                score, lives, mscore, mlives, hscore, hlives, level = mouseTargetdown(score, lives, mscore, mlives, hscore, hlives, level)
         
 
  
     # --- Game logic goes here
+
     
     for target in TARGET:
-        target.moveDown(1)
+        target.moveRight(1)
 
     for target in MTARGET:
-        target.moveDown(2)
+        target.moveRight(2)
 
     for target in HTARGET:
-        target.moveDown(3)
+        target.moveRight(3)
 
     if lives == 0:
         level == 8
@@ -513,10 +511,10 @@ while carryOn:
     elif level == 5:
         screen.fill(Background3)     
         for target in TARGET:
-            if target.rect.y > SCREENHEIGHT:
+            if target.rect.x > SCREENWIDTH:
                 target.changeSpeed(random.randint(5, 20))
-                target.rect.y = -200
-                target.rect.x = random.randint(0, 400)
+                target.rect.x = -200
+                target.rect.y = random.randint(0, 400)
 
         TARGET.draw(screen)
         fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
@@ -548,10 +546,10 @@ while carryOn:
     elif level == 6:
         screen.fill(Background3)
         for mtarget in MTARGET:
-            if mtarget.rect.y > SCREENHEIGHT:
+            if mtarget.rect.x > SCREENWIDTH:
                 mtarget.changeSpeed(random.randint(5, 20))
-                mtarget.rect.y = -200
-                mtarget.rect.x = random.randint(0, 400)
+                mtarget.rect.x = -200
+                mtarget.rect.y = random.randint(0, 400)
 
 
         MTARGET.draw(screen)
@@ -583,10 +581,10 @@ while carryOn:
     elif level == 7: 
         screen.fill(Background3)
         for htarget in HTARGET:
-            if htarget.rect.y > SCREENHEIGHT:
+            if htarget.rect.x > SCREENWIDTH:
                 htarget.changeSpeed(random.randint(5, 20))
-                htarget.rect.y = -200
-                htarget.rect.x = random.randint(0, 400)
+                htarget.rect.x = -200
+                htarget.rect.y = random.randint(20, 780)
                 
         HTARGET.draw(screen)
         fontText6Title = pygame.font.Font('freesansbold.ttf', 26)
