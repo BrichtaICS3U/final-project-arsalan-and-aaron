@@ -160,10 +160,6 @@ def Hard():
     global level
     level = 7
 
-def Custom():
-    "Custom"
-    print("You clicked Custom!")
-
 def sound_ON():
     """this will turn the sound on"""
     print("sound ON")
@@ -212,6 +208,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
         if Target.rect.collidepoint(pos):
             Hit = True
             score += 1
+            print ("Your score is:", (score), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -223,6 +220,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
         if Mtarget.rect.collidepoint(pos):
             Hit = True
             mscore += 1
+            print ("Your score is:", (mscore), "!")
 
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -235,6 +233,7 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
         if Htarget.rect.collidepoint(pos):
             Hit = True
             hscore += 1
+            print ("Your score is:", (hscore), "!")
             
             pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
             pygame.mixer.music.load('Ding.mp3')
@@ -258,6 +257,11 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             mlives = 2
             hscore = 0
             hlives = 1
+
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Buzz.mp3')
+            pygame.mixer.music.play(0)
+            
         if level == 6 and mlives == 0:
             print ("No more lives! Game over.")
             Back_Menu()
@@ -267,8 +271,13 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             mlives = 2
             hscore = 0
             hlives = 1
+
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Buzz.mp3')
+            pygame.mixer.music.play(0)
+            
         if level == 7 and hlives == 0:
-            print ("No missed! Game over.")
+            print ("You missed! Game over.")
             Back_Menu()
             score = 0
             lives = 3
@@ -276,6 +285,11 @@ def mouseTargetdown(score, lives, mscore, mlives, hscore, hlives):
             mlives = 2
             hscore = 0
             hlives = 1
+
+            pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+            pygame.mixer.music.load('Buzz.mp3')
+            pygame.mixer.music.play(0)
+            
 
     #if Hit == True:
         #myTarget.rect.x = random.randint(50, 750)
@@ -307,7 +321,6 @@ button2_OFF = Button("OFF",(SCREENWIDTH/2 + 100, SCREENHEIGHT/2 - 100), music_OF
 button_easy = Button("EASY", (SCREENWIDTH/2 - 200, SCREENHEIGHT/2 - 200), Easy, BUTTON3)
 button_medium = Button("MEDIUM", (SCREENWIDTH/2, SCREENHEIGHT/2 - 200), Medium, BUTTON3)
 button_hard = Button("HARD", (SCREENWIDTH/2 + 200, SCREENHEIGHT/2 - 200), Hard, BUTTON3)
-button_Custom = Button ("CUSTOM",(SCREENWIDTH/2, SCREENHEIGHT/2 -100),  Custom, BUTTON3)
 button_menu = Button("MENU", (SCREENWIDTH/8, SCREENHEIGHT/2 + 230), Back_Menu, BUTTON3)
 
 #buttons in Instructions (level 4)
@@ -322,7 +335,7 @@ button_play2 = Button("PLAY", (SCREENWIDTH/2 + 300, SCREENHEIGHT/2 + 230), Play,
 #arrange button groups depending on level
 level1_buttons = [button_01, button_02, button_03, button_04]
 level2_buttons  = [button_05, button_ON, button_OFF, button2_ON,button2_OFF]
-level3_buttons = [button_easy, button_medium, button_hard, button_menu, button_Custom]
+level3_buttons = [button_easy, button_medium, button_hard, button_menu]
 level4_buttons = [button_menu, button_play2]
 
 #---------Main Program Loop----------
